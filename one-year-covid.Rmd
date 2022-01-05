@@ -1,0 +1,1184 @@
+---
+title: "One year of Covid-19 in 5 major European countries:"
+subtitle: "a comparative analysis of excess mortality"
+author: Gianluca Baio
+institute: "[Department of Statistical Science](https://www.ucl.ac.uk/statistics/) | University College London"
+params: 
+   conference: "MRC Biostatistics Unit Seminars"
+   location: "MRC Biostatistics Cambridge"
+   date: 9 November 2021
+   short_title: "One year of Covid in 5 countries"
+output:
+  xaringan::moon_reader: 
+    includes: 
+       in_header: "assets/latex_macros.html" 
+       # This line adds a logo based on the format selected in the file 'assets/include_logo.html'
+       # NB: the actual options (eg placement of the logo and actual logo file) can be changed there
+       after_body: "assets/ucl-stats/insert-logo.html"
+    seal: false
+    yolo: no
+    lib_dir: libs
+    nature:
+      beforeInit: ["https://platform.twitter.com/widgets.js"]
+      highlightStyle: github
+      highlightLines: yes
+      countIncrementalSlides: no
+      ratio: '16:9'
+      titleSlideClass:
+      - center
+      - middle
+    self_contained: false 
+    css:
+    - "assets/ucl-stats.css"
+---
+
+```{r echo=F,message=FALSE,warning=FALSE,comment=NA}
+# Sources the R file with all the relevant setup and commands
+source("assets/setup.R")
+
+# Stuff from 'xaringanExtra' (https://pkg.garrickadenbuie.com/xaringanExtra)
+# This allows the use of panels (from 'xaringanExtra')
+xaringanExtra::use_panelset()
+# This allows to copy code from the slides directly
+xaringanExtra::use_clipboard()
+# This freezes the frame for when there's a gif included
+xaringanExtra::use_freezeframe()
+
+# Defines the path to the file with the .bib entries (in case there are references)
+bibfile=ReadBib("~/Dropbox/Perso/Office/CV/mypubs.bib",check = FALSE)
+```
+
+class: title-slide
+
+# `r rmarkdown::metadata$title``r vspace("10px")` `r rmarkdown::metadata$subtitle`
+
+## `r rmarkdown::metadata$author`
+
+### `r rmarkdown::metadata$institute`    
+
+.title-small[
+`r icon::icon_style(icon::fontawesome("envelope",style = "solid"),scale=.8,fill="#00acee")`  [g.baio@ucl.ac.uk](mailto:g.baio@ucl.ac.uk)
+`r icon::icon_style(icon::fontawesome("firefox"),scale=.8,fill="#EA7600")`  [https://gianluca.statistica.it](https://gianluca.statistica.it)
+`r icon::icon_style(icon::fontawesome("firefox"),scale=.8,fill="#EA7600")`  [https://egon.stats.ucl.ac.uk/research/statistics-health-economics/](https://egon.stats.ucl.ac.uk/research/statistics-health-economics/)
+`r icon::icon_style(icon::fontawesome("github"),scale=.8,fill="black")`  [https://github.com/giabaio](https://github.com/giabaio)
+`r icon::icon_style(icon::fontawesome("github"),scale=.8,fill="black")`  [https://github.com/StatisticsHealthEconomics](https://github.com/StatisticsHealthEconomics)
+`r icon::icon_style(icon::fontawesome("twitter"),scale=.8,fill="#00acee")`  [@gianlubaio](https://twitter.com/gianlubaio)
+]
+
+### `r rmarkdown::metadata$params$conference`, `r rmarkdown::metadata$params$location` 
+<!-- Can also separate the various components of the extra argument 'params', eg as in 
+### `r paste(rmarkdown::metadata$params, collapse=", ")`
+-->
+
+`r ifelse(is.null(rmarkdown::metadata$params$date),format(Sys.Date(),"%e %B %Y"),rmarkdown::metadata$params$date)`
+
+.logo-stats[]
+
+<!-- This adds a footer (optional and with other possibilities...) 
+.footer-left[ 
+<span style="position: relative; bottom: 0px; color: #D5D5D5;"> &nbsp; &copy; Gianluca Baio (UCL)</span>
+]
+-->
+
+`r postit(text=paste0('Check out our departmental podcast "Random Talks" on Soundcloud!', add_podcast()), top="75%",left="2.5%",height="6.3em",width="6.3em",rotate="-8deg")`
+
+
+`r postit(text=paste0("Follow our departmental social media accounts", add_twitter(url="https://twitter.com/stats_ucl",title="@stats_UCL",fill="#00acee"), add_linkedin(url="https://www.linkedin.com/in/statistical-science-ucl-906b9a201",title="LinkedIn")),top="53%",left="6.5%",height="6.3em",width="6.3em")`
+
+---
+
+layout: true  
+
+.my-footer[ 
+.alignleft[ 
+&nbsp; &copy; Gianluca Baio (UCL) | `r add_twitter()` `r add_github()` `r add_email()` `r add_website()` 
+]
+.aligncenter[
+`r rmarkdown::metadata$params$short_title` 
+]
+.alignright[
+`r rmarkdown::metadata$params$conference`, `r short_date`
+]
+] 
+
+---
+
+# Acknowledgements 
+
+### This is joint work with .alignright[`r icon::academicons("doi")` [Konstantinoudis et al (2021)](https://www.medrxiv.org/content/10.1101/2021.10.18.21264686v1)]
+
+#### Core team
+- [Marta Blangiardo](https://www.imperial.ac.uk/people/m.blangiardo) (Imperial College London)
+- [Michela Cameletti](https://sites.google.com/site/michelacameletti) (University of Bergamo, Italy)
+- [Monica Pirani](https://www.imperial.ac.uk/people/monica.pirani) (Imperial College London)
+- [Garyfallos Konstantinoudis](https://www.imperial.ac.uk/people/g.konstantinoudis) (Imperial College London)
+- [Virgilio Gómez-Rubio](https://becarioprecario.github.io/) (University of Castilla-La Mancha, Spain)
+
+#### Other colleagues 
+- Amparo Larrauri, Imma León (Spain); Julien Riou, Matthias Egger (Switzerland); Paolo Vineis (UK/Italy)
+
+### Extra stuff...
+
+- `r icon::fontawesome("github")` The datasets and code used in the analysis is available at [https://github.com/gkonstantinoudis/ExcessDeathsCOVID](https://github.com/gkonstantinoudis/ExcessDeathsCOVID)
+- `r icon::fontawesome("laptop")` The results are also provided in a ShinyApp available at [http://atlasmortalidad.uclm.es/excess/](http://atlasmortalidad.uclm.es/excess/)
+
+`r vspace("50px")`
+
+--
+
+.content-box-grey[
+.center[I'll take all the credit if you like this, but the blame is all on them if you don't... `r emo::ji("wink")`]
+]
+
+---
+
+# *Nothing can be said to be certain, except death and taxes...*
+
+.pull-left[
+`r include_fig("politico.png",width="60%",title="")`
+]
+
+.pull-right[
+
+`r include_fig("art-of-stats.jpg",width="35%",title="")`
+
+> "*But in the US each state can have its own legal definition of death, and although the Uniform Declaration of Death Act was introduced in 1981 to try to estabilsh a common model. Some small differences remain. Someone wha had been decleared dead in Alabama could, at least in principle, cease to be legally dead were they across the border in Florida, where the registration must be made by two qualified doctors*"
+
+]
+
+---
+
+# Background
+
+## Why excess mortality?
+
+- The total impact of the COVID-19 pandemic on mortality should be the least controversial outcome to measure. But this is complicated by
+
+   - Lack of real time cause specific data
+   - Quality of coding on death certificate
+
+- Excess mortality during the COVID-19 pandemic is the combination of deaths caused, or contributed to, by infection with SARS-CoV-2 plus deaths that resulted from the widespread behavioural, social and healthcare changes that accompanied national responses to the emergency.
+
+## Focus
+
+- Much of the existing literature focus on national data
+
+- In order to understand the dynamics of the pandemic there is the need to move to a sub-national level
+  - Differences in the socio-demographics/environmental characteristics/healthcare provision
+
+- Limited contribution, mainly for large regions
+
+---
+
+# Data
+
+## All cause mortality
+
+- Data for all-cause deaths and population counts from official sources in the 5 countries
+
+   - Italy
+   - England
+   - Spain
+   - Switzerland
+   - Greece 
+   
+--
+
+- Geographical resolution defined at [*Nomenclature of Territorial Units for Statistics*](https://ec.europa.eu/eurostat/web/nuts/background) (NUTS)
+
+   - Specifically NUTS 3 level (small regions for specific diagnoses) 
+
+   - Some results aggregated back at NUTS2 level (basic regions for the application of regional policies) 
+   
+   - National level
+
+- Grouped by 
+
+   - Sex, age, week and NUTS3 region defined as areas with a population varying from 150,000 to 800,000, for 2015-2020 
+
+--
+
+- Use of [*International Organization for Standardization*](https://www.iso.org/home.html) (ISO) week calendar
+
+   - Seven consecutive days beginning with a Monday and ending with a Sunday 
+   
+- Mortality and population data by age groups 
+
+   - <40, 40-59, 60-69, 70-79 and 80 years and above 
+   
+   - Maintain consistency between countries and the literature
+
+---
+
+# Data
+
+## Population at risk
+
+- Official **yearly** estimates for the population for 2014-2020
+
+   - Directly available for Greece, Spain and Italy at 1 January of every year
+   
+   - For Switzerland, available at 31 December 
+   
+   - England a bit different... (more on this later)
+   
+--
+   
+- Two-steps linear interpolation to predict the population at 1 January 2021
+
+   1. Use data for 1 January 2015 to 1 January 2020 to predict population counts by age, sex and NUTS3 region at 1 January 2021
+   
+   2. Calculate **weekly** 2015-2020 population by linear interpolation of estimates on 1 January 2020 and 1 January 2021, by age, sex and NUTS3
+
+`r vspace("20px")`
+
+--
+
+`r icon::icon_style(icon::fontawesome("exclamation-triangle"),fill="red",scale=1.2)` For England, only mid-year figures are available
+   - But in 2020 these are affected by COVID-19 deaths during the first wave (March-May)
+   
+   - Use yearly data for 2015-2019 to estimate the mid-year population in 2020 using linear interpolation
+   
+   - Then use the estimated population at 1 January 2020 and linear interpolation to obtain the **weekly** population for 2015-2019 
+   
+   - Use weekly data for 2019 as a proxy for 2020
+
+
+---
+
+# Data
+
+## Ambient temperature
+
+- Typically affects death rates $\Rightarrow$ use data on temperature from the [ERA5](https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5) reanalysis dataset of the [Copernicus climate data](https://climate.copernicus.eu/)
+   
+   - Global in situ and satellite measurements
+   
+   - Provides hourly estimates
+   
+   - Available measurements compatible with spatial ***and*** temporal resolution for our analysis
+
+--
+   
+- For each centroid of the grid cells (at $\0.\2\5^\circ\times \0.\2\5^\circ$ resolution) that fall into the NUTS3 regions, calculate the daily mean temperature during 2015-2020 and then the weekly mean to align temperature and mortality data 
+
+- Additionally, as mortality from all causes can be different during national holidays, we also included a binary variable taking the value 1 if the week contains a public holiday and 0 otherwise
+
+---
+
+# Modelling &ndash; Bayesian spatio-temporal model
+
+.content-box-beamer[
+### Main objective
+
+.large[**Predict deaths in 2020 in the .red[hypothetical] scenario of no pandemic**]
+
+]
+
+`r vspace("50px")`
+
+--
+
+.content-box-beamer[
+### Notation
+
+.normal[
+For each country, define separately
+
+- $y_{jtsk}=$ number of all-cause deaths in week $j$ of year $t$ for NUTS3 area $s$ and age-sex group $k$
+
+     $k=1,\ldots,K=10=$ age-sex group (male/female and \\(<\\)40, 40-59, 60-69, 70-79, \\(\geq\\)80)
+
+- $P_{jtsk}=$ population at risk in week $j$ of year $t$ for NUTS3 area $s$ and age-sex group $k$
+
+- $\rho_{jtsk}=$ the risk of death (mortality rate) in week $j$ of year $t$ for NUTS3 area $s$ and age-sex group $k$
+
+- $z_{j}=$ dummy variable for public holiday
+
+- $x_{jts}=$ average weekly temperature in each area
+]
+]
+
+`r vspace("50px")`
+
+--
+
+**NB**: Main analysis excludes younger groups
+
+   - Based on cross-validation and poor predictive performance
+   - Not too surprising &ndash; less affected in the earlier waves of the pandemic...
+
+---
+
+# Modelling &ndash; Bayesian spatio-temporal model
+
+\begin{align*}
+    y_{jtsk}\sim \dpois\left(\rho_{jtsk}P_{jtsk}\right)  \qquad \qquad 
+    \log \left(\rho_{jtsk} \right) = \beta_{0t} + \beta_1 z_{j} + f(x_{jts}) + b_s + w_j 
+\end{align*}
+
+---
+
+count: false
+# Modelling &ndash; Bayesian spatio-temporal model
+
+\begin{align*}
+    y_{jtsk}\sim \dpois\left(\rho_{jtsk}P_{jtsk}\right)  \qquad \qquad 
+    \log \left(\rho_{jtsk} \right) = {\color{blue}\beta_{0t}} + {\color{orange}\beta_1} z_{j} + f(x_{jts}) + b_s + w_j 
+\end{align*}
+
+- ${\color{blue}\beta_{0t}=\beta_0+\varepsilon_t}$: year-specific intercept    
+
+   - $\beta_0\sim \dnorm(\0, \1\0^{\3})$: global intercept 
+   - $\varepsilon_t\sim \dnorm(\0,\tau_\varepsilon^{-1})$: unstructured random effect 
+   
+- $\color{orange}\beta_1\sim \dnorm(\0, \1\0^{\3})$: effect of public holidays 
+
+---
+
+count: false
+# Modelling &ndash; Bayesian spatio-temporal model
+
+\begin{align*}
+    y_{jtsk}\sim \dpois\left(\rho_{jtsk}P_{jtsk}\right)  \qquad \qquad 
+    \log \left(\rho_{jtsk} \right) = \beta_{0t} + \beta_1 z_{j} + {\color{red}f(x_{jts})} + b_s + w_j 
+\end{align*}
+
+.navbargrey[
+- $\beta_{0t}=\beta_0+\varepsilon_t$: year-specific intercept    
+
+   - $\beta_0\sim \dnorm(\0, \1\0^{\3})$: global intercept 
+   - $\varepsilon_t\sim \dnorm(\0,\tau_\varepsilon^{-1})$: unstructured random effect 
+   
+- $\beta_1\sim \dnorm(\0, \1\0^{\3})$: effect of public holidays
+]
+
+**Non-linear effect of average weekly temperature $\color{red}f(x_{jts})$** 
+- RW2 model: $x_{jts} \mid x_{(j-1)ts}, x_{(j-2)ts}, \tau_x \sim \dnorm\left(2x_{(j-1)ts}+x_{(j-2)ts},\tau_x^{-1}\right)$ 
+
+---
+
+count: false
+# Modelling &ndash; Bayesian spatio-temporal model
+
+\begin{align*}
+    y_{jtsk}\sim \dpois\left(\rho_{jtsk}P_{jtsk}\right)  \qquad \qquad
+    \log \left(\rho_{jtsk} \right) = \beta_{0t} + \beta_1 z_{j} + f(x_{jts}) + {\color{magenta}b_s} + w_j 
+\end{align*}
+
+.navbargrey[
+- $\beta_{0t}=\beta_0+\varepsilon_t$: year-specific intercept    
+
+   - $\beta_0\sim \dnorm(\0, \1\0^{\3})$: global intercept 
+   - $\varepsilon_t\sim \dnorm(\0,\tau_\varepsilon^{-1})$: unstructured random effect 
+   
+- $\beta_1\sim \dnorm(\0, \1\0^{\3})$: effect of public holidays
+
+**Non-linear effect of average weekly temperature $f(x_{jts})$**
+- RW2 model: $x_{jts} \mid x_{(j-1)ts}, x_{(j-2)ts}, \tau_x \sim \dnorm\left(2x_{(j-1)ts}+x_{(j-2)ts},\tau_x^{-1}\right)$ 
+]
+
+**Spatial component**
+- ${\color{magenta}b_s=\frac{1}{\sqrt{\tau_b}}\left(\sqrt{1-\phi}\tau_v^{0.5} v_s+\sqrt{\phi}\tau_u^{0.5} u_s\right)}$: Besag-York-Mollié (BYM)-type model 
+
+   - $v_s\sim \dnorm(0,\tau_v^{-1})$: unstructured random effect
+   - $u_s \mid \bm{u}_{-s}\sim \dnorm\left(\frac{\sum_{r=1}^Rn_{rs}u_r}{\sum_{r=1}^R n_{rs}},\frac{1}{\tau_u \sum_{r=1}^R n_{rs}}\right)$: spatially structured random effect 
+   - $\phi \in [0,1]$: mixing parameter (measures proportion of variance explained by the structured effect)
+
+---
+
+count: false
+# Modelling &ndash; Bayesian spatio-temporal model
+
+\begin{align*}
+    y_{jtsk}\sim \dpois\left(\rho_{jtsk}P_{jtsk}\right)  \qquad \qquad 
+    \log \left(\rho_{jtsk} \right) = \beta_{0t} + \beta_1 z_{j} + f(x_{jts}) + b_s + {\color{olive}w_j} 
+\end{align*}
+
+.navbargrey[
+- $\beta_{0t}=\beta_0+\varepsilon_t$: year-specific intercept    
+
+   - $\beta_0\sim \dnorm(\0, \1\0^{\3})$: global intercept 
+   - $\varepsilon_t\sim \dnorm(\0,\tau_\varepsilon^{-1})$: unstructured random effect 
+   
+- $\beta_1\sim \dnorm(\0, \1\0^{\3})$: effect of public holidays
+
+**Non-linear effect of average weekly temperature $f(x_{jts})$**
+- RW2 model: $x_{jts} \mid x_{(j-1)ts}, x_{(j-2)ts}, \tau_x \sim \dnorm\left(2x_{(j-1)ts}+x_{(j-2)ts},\tau_x^{-1}\right)$ 
+
+**Spatial component**
+- $b_s=\frac{1}{\sqrt{\tau_b}}\left(\sqrt{1-\phi}\tau_v^{0.5} v_s+\sqrt{\phi}\tau_u^{0.5} u_s\right)$: Besag-York-Mollié (BYM)-type model 
+
+   - $v_s\sim \dnorm(0,\tau_v^{-1})$: unstructured random effect
+   - $u_s \mid \bm{u}_{-s}\sim \dnorm\left(\frac{\sum_{r=1}^Rn_{rs}u_r}{\sum_{r=1}^R n_{rs}},\frac{1}{\tau_u \sum_{r=1}^R n_{rs}}\right)$: spatially structured random effect 
+   - $\phi \in [0,1]$: mixing parameter (measures proportion of variance explained by the structured effect)
+]
+
+**Temporal component (non-linear weekly effect)**
+- RW1 model (accounts for seasonality): $\color{olive}w_j \mid w_{j-1}, \tau_w \sim \dnorm(w_{j-1},\tau_w^{-1})$ 
+
+---
+
+# Modelling &ndash; Bayesian spatio-temporal model
+
+## Priors (hyperparameters)
+
+All the hyperparameters are modelled using `r icon::academicons("doi")` [**Penalised Complexity** (PC) priors](https://projecteuclid.org/journals/statistical-science/volume-32/issue-1/Penalising-Model-Component-Complexity--A-Principled-Practical-Approach-to/10.1214/16-STS576.full)
+
+- Regularise inference while not forcing too strong information
+   
+- Penalise departure from a "base" model (eg parameter = some fixed value)
+
+   - Prior tends to favour the base model $\Rightarrow$ need fairly strong evidence to move away from it
+   
+   - Distance between the **base** model $\color{red}g(\xi)$ and an **alternative**, more complex model $\color{blue}f(\xi)$ is measured by
+
+.myblue[   
+$$d(f,g) = \sqrt{2\kld(f,g)} \qquad {\style{font-family:inherit; font-size: 105%; color: black;}{\text{with}}} \qquad \kld(f,g) = \int f(\xi)\log\left(\frac{f(\xi)}{g(\xi)}\right)d\xi$$ 
+]
+
+--
+
+   - Penalisation done at a constant rate 
+
+.myblue[   
+$$p(d)=\lambda\exp(-\lambda d)\sim \dexp(\lambda) \qquad {\color{black}\Rightarrow} \qquad p(\xi)=\lambda e^{-\lambda d(\xi)}\left\lvert \frac{\partial d(\xi)}{\partial \xi} \right\rvert$$
+]
+
+   - PC prior defined using probability statements on the model parameters (in the appropriate scale) to determine the value of $\lambda$ using "reasonable" information
+
+---
+
+count: false
+exclude: true
+# Modelling &ndash; Bayesian spatio-temporal model
+
+## Example:
+
+.pull-left[
+
+PC prior for a  **precision** $\tau=\sigma^{-2}$
+
+- Base model: $\sigma=0$
+
+- Set $\Pr(\sigma>\sigma_0)=\alpha,$ for some constants $\sigma_0$ and $\alpha$
+   
+- This implies
+
+   .myblue[
+   $$p(\tau) = \frac{\lambda}{2}\tau^{-3/2}\exp\left(-\lambda\tau^{-1/2}\right) \sim `r sftext("type-2 Gumbel")` $$
+   ]
+   
+   with 
+   
+   .myblue[
+   $$\lambda=-\frac{\log(\alpha)}{\sigma_0}$$
+   ]
+
+`r vspace("20px")`
+- **NB**: The regularising constraint and the actual prior may be defined on **different scales**!
+   - In this case, the resulting prior for the standard deviation is
+   .myblue[
+   $$p(\sigma)\sim\dexp(\lambda)$$
+   ]
+]
+
+```{r echo=FALSE}
+tau=seq(0.01,10,.01)
+sigma_0=2
+alpha=0.1
+lambda=-log(alpha)/sigma_0
+```
+
+.pull-right[
+
+`r vspace("-50px")`
+.center[
+eg: setting $\sigma_0=`r sigma_0`$ and $\alpha=$ `r alpha` gives this  `r icon::icon_style(icon::fontawesome("arrow-circle-down"),scale=1.5,fill="#00acee")`
+]
+
+
+```{r echo=F,fig.width=5,fig.height=5,out.width='85%',fig.align='center',dev="tikz",message=FALSE,warning=FALSE,cache=TRUE,crop=FALSE,opts=list(width="80%",title=""),crop=FALSE,eval=FALSE}
+## See also http://www.leg.ufpr.br/~elias/cursos/montpellier2019/INLA_pc-montpellier.pdf
+tibble(
+   tau=tau,
+   p=(lambda/2)*tau^(-3/2)*exp(-lambda*tau^(-1/2))
+) %>% ggplot(aes(tau,p)) + geom_line() + theme_bw() + xlab(label="$\\tau$") + ylab(label="PC prior")
+```
+`r include_fig("unnamed-chunk-3-1.png",width="90%",title="")`
+]
+
+---
+
+# PC Priors
+
+.panelset[
+.panel[.panel-name[Example]
+.pull-left[
+
+PC prior for a  **precision** $\tau=\sigma^{-2}$
+
+- Base model: $\sigma=0$
+
+- Set $\Pr(\sigma>\sigma_0)=\alpha,$ for some constants $\sigma_0$ and $\alpha$
+   
+- This implies
+
+   .myblue[
+   $$p(\tau) = \frac{\lambda}{2}\tau^{-3/2}\exp\left(-\lambda\tau^{-1/2}\right) \sim `r sftext("type-2 Gumbel")` $$
+   ]
+   
+   with 
+   
+   .myblue[
+   $$\lambda=-\frac{\log(\alpha)}{\sigma_0}$$
+   ]
+
+`r vspace("20px")`
+- **NB**: The regularising constraint and the actual prior may be defined on **different scales**!
+   - In this case, the resulting prior for the standard deviation is
+   .myblue[
+   $$p(\sigma)\sim\dexp(\lambda)$$
+   ]
+]
+
+```{r echo=FALSE}
+tau=seq(0.01,10,.01)
+sigma_0=2
+alpha=0.1
+lambda=-log(alpha)/sigma_0
+```
+
+.pull-right[
+
+`r vspace("-30px")`
+.center[
+eg: setting $\sigma_0=`r sigma_0`$ and $\alpha=$ `r alpha` gives this  `r icon::icon_style(icon::fontawesome("arrow-circle-down"),scale=1.5,fill="#00acee",top="10px")`
+]
+
+
+```{r echo=F,fig.width=5,fig.height=5,out.width='85%',fig.align='center',dev="tikz",message=FALSE,warning=FALSE,cache=TRUE,crop=FALSE,opts=list(width="80%",title=""),crop=FALSE,eval=FALSE}
+## See also http://www.leg.ufpr.br/~elias/cursos/montpellier2019/INLA_pc-montpellier.pdf
+tibble(
+   tau=tau,
+   p=(lambda/2)*tau^(-3/2)*exp(-lambda*tau^(-1/2))
+) %>% ggplot(aes(tau,p)) + geom_line() + theme_bw() + xlab(label="$\\tau$") + ylab(label="PC prior")
+```
+`r include_fig("unnamed-chunk-3-1.png",width="90%",title="")`
+]
+]
+
+.panel[.panel-name[Proof]
+
+Consider the two competing models for some parameter $\theta$ (or data $y$) as a function of a **precision** $\tau$
+$${\color{blue}g(\tau)\sim \dnorm(0,\tau=\tau_0\rightarrow \infty)} \qquad `r sftext("and")` \qquad {\color{red}{f(\tau)\sim \dnorm(0,\tau), \tau\in(0,\infty)}}$$
+
+`r vspace("50px")`
+
+Then 
+
+- $\class{myblue}{\kld(f,g)=\frac{1}{2}\frac{\tau_0}{\tau}\left[ 1+\frac{\tau}{\tau_0}\log\left(\frac{\tau}{\tau_0}\right) -\frac{\tau}{\tau_0} \right] \rightarrow \frac{1}{2}\frac{\tau_0}{\tau}}\qquad {\color{black}`r sftext("if ")`} \tau<<\tau_0$ 
+
+- $\class{myblue}{d(\tau)=\sqrt{2\kld(f,g)}=\sqrt{\frac{\tau_0}{\tau}}=\tau_0^{1/2}\tau^{-1/2}}$
+
+`r vspace("50px")`
+Assuming $\class{myblue}{p(d)=\lambda\exp(-\lambda d)}$ then 
+   
+- $\class{myblue}{\left\lvert \frac{\partial d(\tau)}{\partial \tau} \right\rvert = \left\lvert -\frac{1}{2}\tau^{-3/2}\right\lvert = \frac{1}{2}\tau^{-3/2} \qquad \Rightarrow \qquad p(\tau)=\lambda\exp\left[-\lambda d(\tau)\right]\left\lvert \frac{\partial d(\tau)}{\partial \tau} \right\rvert = \frac{\lambda}{2}\tau^{-3/2} \exp\left( -\lambda \tau^{-1/2}\right)}$
+   
+- $\class{myblue}{\left\lvert\frac{\partial\tau}{\partial\sigma}\right\lvert=\left\lvert\frac{\partial\sigma^{-2}}{\partial\sigma}\right\lvert=\lvert -2\sigma^{-3}\lvert=2\sigma^{-3} \hspace{-8 mu}\qquad\!\! \Rightarrow \qquad p(\sigma=\tau^{-1/2})=\frac{\lambda}{2}\sigma^3\exp\left(-\lambda\sigma\right)\left\lvert\frac{\partial\tau}{\partial\sigma}\right\lvert=\lambda\exp(-\lambda\sigma)}$
+
+]
+]
+
+---
+
+# Modelling &ndash; Bayesian spatio-temporal model
+
+## Priors (hyperparameters)
+
+### Spatial field
+
+.pull-left[
+- Set $\Pr(\tau_b^{-0.5}>1)=0.01$ $\Rightarrow \lambda=-\log(0.01)\approx 4.61$ 
+
+   - Basically implies $\sigma_b\sim\dexp(4.61)$ 
+   
+   - *Very* unlikely to have a relative risk > $\exp(2)$, based solely on spatial variation
+
+`r vspace("20px")`
+
+]
+
+.pull-right[
+```{r echo=FALSE,fig.width=5,fig.height=5,out.width='85%',fig.align='center',dev="tikz",message=FALSE,warning=FALSE,cache=TRUE,crop=FALSE,opts=list(width="80%",title=""),crop=FALSE,eval=FALSE}
+tibble(sigma=seq(.01,10,.01),p=dexp(sigma,-log(0.01))) %>% ggplot(aes(sigma,p))+geom_line()+theme_bw() + 
+   xlab(label="$\\sigma_b$") + ylab(label="Implied prior for $\\sigma_b$") 
+```
+`r vspace("-60px")`
+`r include_fig("unnamed-chunk-4-1.png",width="90%",title="")`
+]
+
+---
+
+count: false
+# Modelling &ndash; Bayesian spatio-temporal model
+
+## Priors (hyperparameters)
+
+### Spatial field
+
+.pull-left[
+- Set $\Pr(\tau_b^{-0.5}>1)=0.01$ $\Rightarrow \lambda=-\log(0.01)\approx 4.61$ 
+
+   - Basically implies $\sigma_b\sim\dexp(4.61)$ 
+   
+   - *Very* unlikely to have a relative risk > $\exp(2)$, based solely on spatial variation
+
+`r vspace("20px")`
+
+- Set $\Pr(\phi<0.5)=0.5$ 
+
+   - Reflect lack of knowledge about which spatial component dominates the field
+   
+   - **NB**: Resulting distribution is non-standard
+
+`r vspace("40px")`
+
+]
+
+.pull-right[
+```{r pc-phi,echo=FALSE,fig.width=5,fig.height=5,out.width='85%',fig.align='center',dev="tikz",message=FALSE,warning=FALSE,cache=TRUE,crop=FALSE,opts=list(width="80%",title=""),crop=FALSE,eval=FALSE}
+
+# https://inla.r-inla-download.org/r-inla.org/doc/latent/besagproper2.pdf
+# Uses the data on Germany to get the Besag precision matrix Q
+graph.file = system.file("demodata/germany.graph", package="INLA")
+g = inla.read.graph(graph.file)
+## we will use replicated samples in our testing
+nrep = 5
+tau = 10.0
+lambda = 0.3
+R = -inla.graph2matrix(g)
+diag(R) = g$nnbs
+n = g$n
+Q = tau * ( (1-lambda) * diag(n) + lambda * R)
+
+# https://arxiv.org/pdf/1601.01180.pdf
+# Uses INLA built-in function to get the PC prior for phi
+phi=ilogit(seq(-10,10,0.002))
+log.prior=INLA:::inla.pc.bym.phi(Q=Q,rankdef=1,u=0.5,alpha=0.5)
+#tibble(phi=phi,p=exp(log.prior(phi)),pu=dunif(phi,0,1),pj=dbeta(phi,.5,.5)) %>%
+#   ggplot(aes(phi,p))+geom_line()
+tibble(phi=phi,p=exp(log.prior(phi)),type="PC prior",col="blue") %>% 
+   bind_rows(tibble(phi=phi,p=dunif(phi,0,1),type="Uniform(0,1)",col="black")) %>% 
+   bind_rows(tibble(phi=phi,p=dbeta(phi,.5,.5),type="Jeffreys' prior",col="black")) %>% 
+   ggplot(aes(phi,p,linetype=type,color=col))+geom_line() +   
+   ylim(0,5)+theme_bw()+xlab("$\\phi$")+ylab("PC prior") +
+   scale_linetype_manual(name="",values=c("PC prior"="solid","Uniform(0,1)"="dashed","Jeffreys' prior"="dotted")) +
+   scale_color_manual(values=c("black","blue","black")) + guides(color="none") +
+   theme(legend.pos=c(.25,.85),legend.background = element_rect(fill='transparent'),legend.text=element_text(size=11)) 
+```
+`r vspace("-60px")`
+`r include_fig("pc-phi-1.png",width="90%",title="")`
+]
+
+---
+
+count: false
+# Modelling &ndash; Bayesian spatio-temporal model
+
+## Priors (hyperparameters)
+
+### Spatial field
+
+.pull-left[
+- Set $\Pr(\tau_b^{-0.5}>1)=0.01$ $\Rightarrow \lambda=-\log(0.01)\approx 4.61$ 
+
+   - Basically implies $\sigma_b\sim\dexp(4.61)$ 
+   
+   - *Very* unlikely to have a relative risk > $\exp(2)$, based solely on spatial variation
+
+`r vspace("20px")`
+
+- Set $\Pr(\phi<0.5)=0.5$ 
+
+   - Reflect lack of knowledge about which spatial component dominates the field
+   
+   - **NB**: Resulting distribution is non-standard
+
+`r vspace("40px")`
+
+### Variance components
+
+- Set $\Pr(\sigma_\varepsilon\!>\!1)\!=\!\Pr(\sigma_x^\!>\!1)\!=\!\Pr(\sigma_w^\!>\!1)\!=\!0.01$
+
+]
+
+.pull-right[
+```{r echo=FALSE,fig.width=5,fig.height=5,out.width='85%',fig.align='center',dev="tikz",message=FALSE,warning=FALSE,cache=TRUE,crop=FALSE,opts=list(width="80%",title=""),crop=FALSE,eval=FALSE}
+tibble(sigma=seq(.01,10,.01),p=dexp(sigma,-log(0.01))) %>% ggplot(aes(sigma,p))+geom_line()+theme_bw() + 
+   xlab(label="$\\sigma_b$") + ylab(label="Implied prior for $\\sigma_b$")
+```
+`r vspace("-60px")`
+`r include_fig("unnamed-chunk-4-1.png",width="90%",title="")`
+]
+
+---
+
+# Modelling &ndash; Bayesian spatio-temporal model
+
+## Training and prediction
+
+- Use data from 2015-2019 to "train" the model 
+
+- Predict area-level weekly mortality for 2020 (\\(t=6\\)), **in the hypothetical scenario** in which the pandemic hadn't occurred
+   
+   .myblue[
+   $$p(y_{j6sk}\mid \mathcal{D}) = \int p(y_{j6sk}\mid \bm\theta)p(\bm\theta\mid\mathcal{D})\bm\theta$$
+   ]
+   
+   - $\bm\theta=$ all model parameters
+   - $\mathcal{D}=$ observed data in 2015-2019
+   - Mortality rates applied to 2020 come from the model trained on 2015-2019
+   
+- Compare observed deaths in 2020 with model predictions
+
+`r vspace("50px")`
+
+--
+
+
+.content-box-grey[
+
+`r icon::icon_style(icon::fontawesome("exclamation-triangle"),fill="red",scale=1.2)` This assumes **exchangeability** between 2015-2019 and 2020...
+
+- Which is **obviously** an unjustifiable assumption &ndash; the pandemic **did** change the underlying data generating process!
+
+- **But**: it allows us to measure the excess mortality
+
+]
+
+---
+
+# Modelling &ndash; Bayesian spatio-temporal model
+## Inferential engine
+
+- All models have been fitted using [**Integrated Nested Laplace Approximation**](https://www.r-inla.org/) (INLA)
+
+- Considers a general formulation for a surprisingly large range of models (.red[**Latent Gaussian Models**], LGM)
+.myblue[
+\begin{aligned}
+\bm\psi & \sim p(\bm\psi) && `r sftext("hyperprior")`\\
+\bm\theta \mid \bm\psi & \sim p(\bm\theta\mid\bm\psi) = \dnorm(0,\bm\Sigma(\bm\psi_1)) && \color{blue}{`r sftext("GMRF prior")`} \\
+\bm y \mid \bm \theta,\bm\psi & \sim \prod_i p(y_i\mid\bm \theta,\bm\psi_2) && `r sftext("Data model")`
+\end{aligned}
+]
+
+--
+
+1. .blue[Gaussian Markov Random Field (GMRF)]
+
+   .myblue[
+\begin{aligned}
+\bm\theta\mid\bm\psi \sim \dnorm(\bm 0,\bm\Sigma(\bm\psi)) &&\\
+\theta_l \perp\!\!\!\perp \theta_m \mid \bm\theta_{-lm} \Leftrightarrow \bm{Q}_{lm}=\bm{\Sigma}^{-1}_{lm} = 0 &&
+\end{aligned}
+]
+   
+   - Conditional independence among elements of $\bm\theta$ implies that the **precision** matrix is sparse $\Rightarrow$ speeds up computation
+
+2. Dimensionality of parameters
+
+   - The dimension of $\bm\theta$ can be very large (e.g. 10\\(^\2\\)&ndash;10\\(^\5\\) )
+ 
+   - Conversely, because of the conditional independence properties, the dimension of $\bm\psi$ needs to be generally small (e.g. 1&ndash;5)
+
+---
+
+exclude: true
+# Modelling &ndash; Bayesian spatio-temporal model
+
+```{r inla1,echo=FALSE,fig.width=5,fig.height=5,out.width='85%',fig.align='center',dev="tikz",message=FALSE,warning=FALSE,cache=TRUE,crop=FALSE,opts=list(width="80%",title=""),crop=FALSE,eval=TRUE}
+##########################################################################################
+## INLA step-by-step
+## The model is a simple semi-conjugated Normal:
+# y_i \mid \theta,\psi \sim \dnorm(\theta,\psi); \psi=\sigma^{-2}
+# \theta \mid \psi \sim \dnorm(\theta_0,\psi_0); for fixed \theta_0,\psi_0
+# \psi \sim dgamma(a_0,b_0); for fixed a_0,b_0
+
+text_size=11
+
+# Loads the data
+y <- c(1.2697,7.7637,2.2532,3.4557,4.1776,6.4320,-3.6623,7.7567,
+5.9032,7.2671,-2.3447,8.0160,3.5013,2.8495,0.6467,3.2371,
+5.8573,-3.3749,4.1507,4.3092,11.7327,2.6174,9.4942,-2.7639,
+-1.5859,3.6986,2.4544,-0.3294,0.2329,5.2846)
+n <- length(y)
+ybar <- mean(y)
+
+# Fixed hyper-parameters
+mu0 <- -3
+sigma0 <- 2
+tau0 <- sigma0^-2
+a0 <- 1.6
+b0 <- .4
+
+## The full-conditionals are known analytically
+# \theta \mid \bm{y},\psi \sim \dnorm(\theta_n,\psi_n)
+# \psi \mid \bm{y},\psi \sim \dgamma(a_n,b_n)
+
+# 1. Approximates the marginal posterior for psi
+H <- 21  	# grid points for the hyperparameter psi
+psi.min <- .001
+psi.max <- .3
+# Makes an arbitrary, relatively spread-out grid - INLA would actually use CCD to determine the grid values...
+psi.grid <- c(.001,.002,seq(.03,.1,length.out=H-7),seq(.11,.3,length.out=5))
+hprior <- dgamma(psi.grid,a0,scale=1/b0)    # hyperprior
+
+## NB: because p(psi|y)=p(theta,psi|y)/p(theta|psi,y) the marginal posterior for psi 
+##     cannot depend on theta, so we can evaluate the terms depending on theta in the 
+##     RHS at an arbitrary value  (for simplicity, use the "posterior mean" mu.n --- 
+##     see Gelman et al page 82)
+mu.n <- tau.n <- lik <- num <- den <- prior <- numeric()
+for (h in 1:H) {
+  mu.n[h] <- (mu0*tau0 + n*ybar*psi.grid[h])/(tau0+n*psi.grid[h])
+  tau.n[h] <- tau0+n*psi.grid[h]
+  prior[h] <- dnorm(mu.n[h],mu0,sd=1/sqrt(tau0))
+  lik[h] <- prod(dnorm(y,mu.n[h],sd=1/sqrt(psi.grid[h])))
+  num[h] <- hprior[h]*prior[h]*lik[h]
+  den[h] <- dnorm(mu.n[h],mu.n[h],sd=1/sqrt(tau.n[h]))	# evaluates the approx to the 
+                                                         # denominator at the mode
+                                                         # (in this case, that's the truth)
+}
+post.psi <- num/den                                      # Unnormalised marginal posterior for psi | y
+
+# Now normalises the density
+f.psi <- approxfun(psi.grid,post.psi,yleft=min(psi.grid),yright=max(psi.grid))
+const <- integrate(f.psi,min(psi.grid),max(psi.grid))
+post.psi <- post.psi/const$value
+p1=tibble(psi=psi.grid,post.grid=post.psi) %>% 
+   ggplot(aes(psi,post.grid))+geom_point() + theme_bw() +
+   xlab("$\\psi$")+ylab("") + 
+   geom_line(data=tibble(x=spline(psi.grid,post.psi)$x,y=spline(psi.grid,post.psi)$y),aes(x,y)) +
+   labs(title="Posterior marginal $p(\\bm\\psi\\mid\\bm{y}) = \\frac{p(\\bm\\theta,\\bm\\psi\\mid\\bm{y})}{p(\\bm\\theta\\mid\\bm\\psi,\\bm{y})} \\approx \\frac{p(\\bm\\psi)p(\\bm\\theta\\mid\\bm\\psi)p(\\bm{y}\\mid\\bm\\theta)}{\\tilde{p}(\\bm\\theta\\mid\\bm\\psi^*_h,\\bm{y})}=\\tilde{p}(\\bm\\psi_h^*\\mid\\bm{y})$")+
+#   labs(title="Posterior marginal for $\\psi: p(\\psi\\mid\\bm{y})\\propto p(\\bm{y}\\mid\\psi)p(\\psi)=\\frac{p(\\theta,\\bm{y}\\mid\\psi)p(\\psi)}{p(\\theta\\mid\\bm{y},\\psi)}$")+
+   theme(plot.title=element_text(size=text_size))
+p1
+```
+
+```{r inla2,echo=FALSE,fig.width=5,fig.height=5,out.width='85%',fig.align='center',dev="tikz",message=FALSE,warning=FALSE,cache=TRUE,crop=FALSE,opts=list(width="80%",title=""),crop=FALSE,eval=TRUE}
+# 2. Approximates the conditional posterior of theta, given psi,y
+J <- 100  # grid points for the parameter theta
+min.theta <- -8
+max.theta <- 5
+theta.grid <- seq(min.theta,max.theta,length.out=J)
+
+post.theta.psi <- matrix(NA,J,H)
+for (j in 1:J) {
+  for (h in 1:H) {
+    post.theta.psi[j,h] <- dnorm(theta.grid[j],mu.n[h],sd=1/sqrt(tau.n[h]))
+  }
+}
+
+# Unweighted conditional posteriors for theta given psi,y
+p2=tibble(theta=rep(theta.grid,ncol(post.theta.psi)),num=rep(1:ncol(post.theta.psi),each=length(theta.grid))) %>% 
+   bind_cols(tibble(post.theta.psi=unlist(as_tibble(post.theta.psi)))) %>% 
+   ggplot(aes(theta,post.theta.psi,group=num))+geom_line() + theme_bw() +
+   xlab("$\\theta_j$")+ylab("")+ 
+   labs(title="Posterior marginal for $\\theta_j$, conditional on each ${\\bm\\psi_h^*}$ value (unweighted)")+
+   theme(plot.title=element_text(size=text_size))+
+   annotate("text",x=-Inf,y=Inf,label="$p(\\theta_j\\mid\\bm\\psi,\\bm{y})=\\frac{p(\\bm\\theta,\\bm\\psi\\mid\\bm{y})}{p(\\bm\\theta_{-j}\\mid\\theta_j,\\bm\\psi,\\bm{y})}$",vjust=2.5,hjust=-0.05)+
+   annotate("text",x=-Inf,y=Inf,label="$\\approx\\frac{p(\\bm\\theta,\\bm\\psi\\mid\\bm{y})}{\\tilde{p}(\\bm\\theta_{-j}\\mid\\theta_j,\\bm\\psi^*_h,\\bm{y})}=\\tilde{p}(\\theta_j\\mid\\bm\\psi_h^*,\\bm{y})$",vjust=5.5,hjust=-.43)
+p2
+```
+
+```{r inla3,echo=FALSE,fig.width=5,fig.height=5,out.width='85%',fig.align='center',dev="tikz",message=FALSE,warning=FALSE,cache=TRUE,crop=FALSE,opts=list(width="80%",title=""),crop=FALSE,eval=TRUE}
+# Weighted conditional posteriors for theta given psi,y
+# NB: INLA computes the weights during the grid exploration (which we're not doing!)
+#     The weights are the normalised values of the marginal posterior density for psi
+wgt <-post.psi/sum(post.psi)
+post.theta.psi.wgt <- matrix(NA,J,H)
+for (h in 1:H) {
+  post.theta.psi.wgt[,h] <- post.theta.psi[,h]*wgt[h]
+}
+rg <- range(-10,10)
+p3=tibble(theta=rep(theta.grid,ncol(post.theta.psi)),num=rep(1:ncol(post.theta.psi.wgt),each=length(theta.grid))) %>% 
+   bind_cols(tibble(post.theta.psi.wgt=unlist(as_tibble(post.theta.psi.wgt)))) %>% 
+   ggplot(aes(theta,post.theta.psi.wgt,group=num))+geom_line() + theme_bw() +
+   xlab("$\\theta_j$")+ylab("") +
+   labs(title="Posterior marginal for $\\theta_j$, conditional on each ${\\bm\\psi_h^*}$ value (weighted)")+
+   theme(plot.title=element_text(size=text_size))+
+   annotate("text",x=-Inf,y=Inf,label="$\\tilde{p}(\\theta_j\\mid\\bm\\psi_h^*,\\bm{y})\\Delta_h$",vjust=2.5,hjust=-0.5)
+p3
+```
+
+```{r inla4,echo=FALSE,fig.width=5,fig.height=5,out.width='85%',fig.align='center',dev="tikz",message=FALSE,warning=FALSE,cache=TRUE,crop=FALSE,opts=list(width="80%",title=""),crop=FALSE,eval=TRUE}
+# Integrates psi out of the density to give the marginal posterior for theta
+marg.post.theta <- apply(post.theta.psi.wgt,1,sum)
+# and now normalises the density
+f.theta <- approxfun(theta.grid,marg.post.theta,yleft=min(theta.grid),
+                     yright=max(theta.grid))
+const <- integrate(f.theta,min(theta.grid),max(theta.grid))
+marg.post.theta <- marg.post.theta/const$value
+p4=tibble(theta=theta.grid,marg.theta=marg.post.theta) %>% ggplot(aes(theta,marg.theta))+geom_line(lwd=1.5,color="blue")+ theme_bw() +
+   xlab("$\\theta_j$")+ylab("") + 
+   geom_line(data=tibble(theta=rep(theta.grid,ncol(post.theta.psi)),num=rep(1:ncol(post.theta.psi.wgt),each=length(theta.grid))) %>% 
+   bind_cols(tibble(post.theta.psi.wgt=unlist(as_tibble(post.theta.psi.wgt)))),aes(theta,post.theta.psi.wgt,group=num),lwd=.3) +
+   labs(title="Posterior marginal for $\\theta_j: p(\\theta_j\\mid\\bm{y})\\approx\\sum_{h} \\tilde{p}(\\bm\\psi_h^*\\mid\\bm{y})\\tilde{p}(\\theta_j\\mid\\bm\\psi_h^*,\\bm{y})\\Delta_h$")+
+   theme(plot.title=element_text(size=text_size))
+p4
+```
+
+```{r inla5,echo=FALSE,fig.width=7,fig.height=5,out.width='85%',fig.align='center',dev="tikz",message=FALSE,warning=FALSE,cache=TRUE,crop=FALSE,opts=list(width="80%",title=""),crop=FALSE,eval=TRUE}
+gridExtra::grid.arrange(p1,p2,p3,p4,ncol=2)
+```
+
+`r include_fig("inla5-1.png",width="70%",title="")`
+
+---
+
+# INLA &ndash; in a nutshell...
+
+.pull-left[
+.medium[
+<ol style="counter-reset: my-counter 0;">
+<li>Select a grid of \(H\) points \(\{\bm\psi_h^*\}\) and the associated area weights \(\{\Delta_h\}\); interpolate the resulting density to compute the approximation to the posterior</li>
+</ol>
+]
+
+`r include_fig("inla1-1.png",width="90%",title="")`
+]
+.pull-right[
+.medium[
+<ol style="counter-reset: my-counter 1;">
+<li> Approximates the conditional posterior of each \(\theta_j\), given \(\bm\psi, \bm{y}\) on the \(H−\)dimensional grid</li>
+</ol>
+]
+
+`r vspace("45px")`
+`r include_fig("inla2-1.png",width="90%",title="")`
+]
+
+---
+
+count: false
+# INLA &ndash; in a nutshell...
+
+.pull-left[
+.medium[
+<ol style="counter-reset: my-counter 2;">
+<li> Weigh the resulting (conditional) marginal posteriors by the density associated with each \(\psi_h^*\) on the grid</li>
+</ol>
+]
+
+`r vspace("20px")`
+`r include_fig("inla3-1.png",width="90%",title="")`
+]
+.pull-right[
+.medium[
+<ol style="counter-reset: my-counter 3;">
+<li> (Numerically) sum over all the conditional densities to obtain the marginal posterior for \(\theta_j\)</li>
+</ol>
+]
+
+`r vspace("20px")`
+`r include_fig("inla4-1.png",width="90%",title="")`
+]
+
+---
+
+# Modelling &ndash; Bayesian spatio-temporal model
+
+## Model validation
+
+.content-box-beamer[
+### Based on cross-validation
+
+.normal[
+- Fit the model for 2015-2019 multiple times, leaving out one year at a time
+
+- Predict the weekly number of deaths by NUTS3 region for the year left out
+
+- Repeat for different age/sex groups and countries
+]
+]
+
+--
+
+`r vspace("40px")`
+
+.content-box-beamer[
+### Assess agreement based on
+
+.normal[   
+- Correlation between predicted and observed deaths
+
+- 95% coveage = $\Pr(`r sftext("Observed deaths lie within 95% interval from the model")`)$
+]
+]
+
+--
+
+`r vspace("20px")`
+
+- Generally, models had good predictive ability
+   - Highest correlation for >80 yo: 0.83 (0.82-0.84) for females/England to 0.97 (0.97-0.98) for males/Spain
+   - Coverage range from 0.90 (females/Spain) to 0.95 (males/Switzerland)
+   
+- <40 yo had poorer performance
+   - Coverage *close* to nominal 0.95, but correlation much lower $\Rightarrow$ excluded from base-case analysis
+
+---
+
+# Results
+
+### Country-level trends & excess mortality
+
+`r vspace("-22px")`
+.pull-left[
+`r include_fig("Fig1_EN.png",width="72%",title="England")` 
+]
+.pull-right[
+`r include_fig("Fig1_SP.png",width="72%",title="Spain")`
+]
+
+---
+
+count: false
+# Results
+
+### Country-level trends & excess mortality
+
+`r vspace("-22px")`
+.pull-left[
+`r include_fig("Fig1_CH.png",width="72%",title="Switzerland")` 
+]
+.pull-right[
+`r include_fig("Fig1_GR.png",width="72%",title="Greece")`
+]
+
+---
+
+count: false
+# Results
+
+### Country-level trends & excess mortality
+
+`r vspace("-22px")`
+`r include_fig("Fig1_IT.png",width="35%",title="Italy")`
+
+---
+
+# Results
+
+### Sub-national level trends & excess mortality (NUTS2)
+
+#### Relative excess death (%)
+`r vspace("-22px")`
+`r include_fig("eng-nuts3.png",width="70%",title="Eng")`
+
+---
+
+
+count: false
+# Results
+
+### Sub-national level trends & excess mortality (NUTS2)
+
+#### Relative excess death (%)
+
+`r vspace("-22px")`
+`r include_fig("swi-spa-nuts3.png",width="70%",title="Swi/Spa")`
+
+---
+
+count: false
+# Results
+
+### Sub-national level trends & excess mortality (NUTS2)
+
+#### Relative excess death (%)
+
+`r vspace("-22px")`
+
+`r include_fig("gr-it-nuts3.png",width="65%",title="Gre/Ita")`
+
+---
+
+# Results
+
+### Sub-national level trends & excess mortality (NUTS3) .alignright[.small[Median relative excess death (%)]]
+
+`r vspace("-22px")`
+`r include_fig("all-nuts3.png",width="67%",title="all")`
+
+---
+
+
+count: false
+# Results
+
+### Sub-national level trends & excess mortality (NUTS3) .alignright[.small[Probability that relative excess deaths is > 0%]]
+
+`r vspace("-22px")`
+`r include_fig("all-probs-nuts3.png",width="65%",title="all")`
+
+---
+
+# All that and more...
+
+<iframe frameborder="no" src="http://atlasmortalidad.uclm.es/excess/"
+style="
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    width: 200%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    z-index: 999999;
+    height: 100%;
+    ms-transform: scale(0.45);
+   -moz-transform: scale(0.85);
+   -o-transform: scale(0.85);
+   -webkit-transform: translate(+50%, -50%);
+    transform: translate(+50%, -50%);
+    <!--
+   -webkit-transform: scale(0.45);
+   transform: scale(0.70);
+   -->
+"> </iframe>
+
+---
+
+# Conclusions
+
+- Wide variation in 2020 excess mortality both within and across countries 
+
+   - Spain seems to have experienced the largest excess mortality
+   
+   - Greece and Italy especially had a very strong spatial gradient
+   
+   - Temporal patterns in all countries (possibly less so for Greece)
+
+`r vspace("30px")`
+
+--
+
+- Results are generally in line with other findings in the literature 
+
+   - Slightly lower *point* estimates than **national** analyses for England (but intervals agree) 
+   
+   - Consistent results for **national** estimates for Greece, Italy, Switzerland and Spain
+
+`r vspace("30px")`
+
+--
+
+- Overall, seem to suggest that a timely lockdown led to reduced community transmissions and, subsequently, lower excess mortality
+
+---
+
+class: thankyou-barney 

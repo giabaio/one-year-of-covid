@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>One year of Covid-19 in 5 major European countries:</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gianluca Baio" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <script src="libs/freezeframe/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <!-- (Re)Defines a bunch of LaTeX commands that can then be used directly in the .Rmd file as '\command{...}' -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        /* This enables color macros */
+        extensions: ["color.js"],
+        Macros: {
+          /* Probability & mathematical symbols */
+          Pr: "{\\style{font-family:inherit; font-size: 110%;}{\\text{Pr}}}",
+          exp: "{\\style{font-family:inherit; font-size: 105%;}{\\text{exp}}}",
+          log: "{\\style{font-family:inherit; font-size: 105%;}{\\text{log}}}",
+          ln: "{\\style{font-family:inherit; font-size: 105%;}{\\text{ln}}}",
+          logit: "{\\style{font-family:inherit; font-size: 100%;}{\\text{logit}}}",
+          HR: "{\\style{font-family:inherit; font-size: 105%;}{\\text{HR}}}",
+          OR: "{\\style{font-family:inherit; font-size: 105%;}{\\text{OR}}}",
+          E: "{\\style{font-family:inherit; font-size: 105%;}{\\text{E}}}",
+          Var: "{\\style{font-family:inherit; font-size: 105%;}{\\text{Var}}}",
+          Cov: "{\\style{font-family:inherit; font-size: 105%;}{\\text{Cov}}}",
+          Corr: "{\\style{font-family:inherit; font-size: 105%;}{\\text{Corr}}}",
+          DIC: "{\\style{font-family:inherit; font-size: 105%;}{\\text{DIC}}}",
+          se: "{\\style{font-family:inherit; font-size: 100%;}{\\text{se}}}",
+          sd: "{\\style{font-family:inherit; font-size: 100%;}{\\text{sd}}}",
+          kld: "{\\style{font-family:inherit; font-size: 100%;}{\\text{kld}}}",
+          /* Distributions */
+          dnorm: "{\\style{font-family:inherit;}{\\text{Normal}}}",
+          dt: "{\\style{font-family:inherit;}{\\text{t}}}",
+          ddirch: "{\\style{font-family:inherit;}{\\text{Dirichlet}}}",
+          dmulti: "{\\style{font-family:inherit;}{\\text{Multinomial}}}",
+          dbeta: "{\\style{font-family:inherit;}{\\text{Beta}}}",
+          dgamma: "{\\style{font-family:inherit;}{\\text{Gamma}}}",
+          dbern: "{\\style{font-family:inherit;}{\\text{Bernoulli}}}",
+          dbin: "{\\style{font-family:inherit;}{\\text{Binomial}}}",
+          dpois: "{\\style{font-family:inherit;}{\\text{Poisson}}}",
+          dweib: "{\\style{font-family:inherit;}{\\text{Weibull}}}",
+          dexp: "{\\style{font-family:inherit;}{\\text{Exponential}}}",
+          dlnorm: "{\\style{font-family:inherit;}{\\text{logNormal}}}",
+          dunif: "{\\style{font-family:inherit;}{\\text{Uniform}}}",
+          /* LaTeX formatting */
+          bm: ["{\\boldsymbol #1}",1],
+          /* These create macros to typeset numbers in maths with the basic font */
+          0: "{\\style{font-family:inherit; font-size: 105%;}{\\text{0}}}",
+          1: "{\\style{font-family:inherit; font-size: 105%;}{\\text{1}}}",
+          2: "{\\style{font-family:inherit; font-size: 105%;}{\\text{2}}}",
+          3: "{\\style{font-family:inherit; font-size: 105%;}{\\text{3}}}",
+          4: "{\\style{font-family:inherit; font-size: 105%;}{\\text{4}}}",
+          5: "{\\style{font-family:inherit; font-size: 105%;}{\\text{5}}}",
+          6: "{\\style{font-family:inherit; font-size: 105%;}{\\text{6}}}",
+          7: "{\\style{font-family:inherit; font-size: 105%;}{\\text{7}}}",
+          8: "{\\style{font-family:inherit; font-size: 105%;}{\\text{8}}}",
+          9: "{\\style{font-family:inherit; font-size: 105%;}{\\text{9}}}",
+          /* Health economics quantities */
+          icer: "{\\style{font-family:inherit; font-size: 100%;}{\\text{ICER}}}",
+          nb: "{\\style{font-family:inherit; font-size: 100%;}{\\text{NB}}}",
+          ol: "{\\style{font-family:inherit; font-size: 100%;}{\\text{OL}}}",
+          ceac: "{\\style{font-family:inherit; font-size: 100%;}{\\text{CEAC}}}",
+          evpi: "{\\style{font-family:inherit; font-size: 100%;}{\\text{EVPI}}}",
+          evppi: "{\\style{font-family:inherit; font-size: 100%;}{\\text{EVPPI}}}",
+          evsi: "{\\style{font-family:inherit; font-size: 100%;}{\\text{EVSI}}}"
+        }
+      }
+    });
+    </script>
+    <link rel="stylesheet" href="assets/ucl-stats.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+class: title-slide
+
+# One year of Covid-19 in 5 major European countries:&lt;span style="display:block; margin-top: 10px ;"&gt;&lt;/span&gt; a comparative analysis of excess mortality
+
+## Gianluca Baio
+
+### [Department of Statistical Science](https://www.ucl.ac.uk/statistics/) | University College London    
+
+.title-small[
+&lt;svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="position:relative;display:inline-block;top:.1em;fill:#00acee;height:0.8em;"&gt;  [ comment ]  &lt;path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"&gt;&lt;/path&gt;&lt;/svg&gt;  [g.baio@ucl.ac.uk](mailto:g.baio@ucl.ac.uk)
+&lt;svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="position:relative;display:inline-block;top:.1em;fill:#EA7600;height:0.8em;"&gt;  [ comment ]  &lt;path d="M503.52,241.48c-.12-1.56-.24-3.12-.24-4.68v-.12l-.36-4.68v-.12a245.86,245.86,0,0,0-7.32-41.15c0-.12,0-.12-.12-.24l-1.08-4c-.12-.24-.12-.48-.24-.6-.36-1.2-.72-2.52-1.08-3.72-.12-.24-.12-.6-.24-.84-.36-1.2-.72-2.4-1.08-3.48-.12-.36-.24-.6-.36-1-.36-1.2-.72-2.28-1.2-3.48l-.36-1.08c-.36-1.08-.84-2.28-1.2-3.36a8.27,8.27,0,0,0-.36-1c-.48-1.08-.84-2.28-1.32-3.36-.12-.24-.24-.6-.36-.84-.48-1.2-1-2.28-1.44-3.48,0-.12-.12-.24-.12-.36-1.56-3.84-3.24-7.68-5-11.4l-.36-.72c-.48-1-.84-1.8-1.32-2.64-.24-.48-.48-1.08-.72-1.56-.36-.84-.84-1.56-1.2-2.4-.36-.6-.6-1.2-1-1.8s-.84-1.44-1.2-2.28c-.36-.6-.72-1.32-1.08-1.92s-.84-1.44-1.2-2.16a18.07,18.07,0,0,0-1.2-2c-.36-.72-.84-1.32-1.2-2s-.84-1.32-1.2-2-.84-1.32-1.2-1.92-.84-1.44-1.32-2.16a15.63,15.63,0,0,0-1.2-1.8L463.2,119a15.63,15.63,0,0,0-1.2-1.8c-.48-.72-1.08-1.56-1.56-2.28-.36-.48-.72-1.08-1.08-1.56l-1.8-2.52c-.36-.48-.6-.84-1-1.32-1-1.32-1.8-2.52-2.76-3.72a248.76,248.76,0,0,0-23.51-26.64A186.82,186.82,0,0,0,412,62.46c-4-3.48-8.16-6.72-12.48-9.84a162.49,162.49,0,0,0-24.6-15.12c-2.4-1.32-4.8-2.52-7.2-3.72a254,254,0,0,0-55.43-19.56c-1.92-.36-3.84-.84-5.64-1.2h-.12c-1-.12-1.8-.36-2.76-.48a236.35,236.35,0,0,0-38-4H255.14a234.62,234.62,0,0,0-45.48,5c-33.59,7.08-63.23,21.24-82.91,39-1.08,1-1.92,1.68-2.4,2.16l-.48.48H124l-.12.12.12-.12a.12.12,0,0,0,.12-.12l-.12.12a.42.42,0,0,1,.24-.12c14.64-8.76,34.92-16,49.44-19.56l5.88-1.44c.36-.12.84-.12,1.2-.24,1.68-.36,3.36-.72,5.16-1.08.24,0,.6-.12.84-.12C250.94,20.94,319.34,40.14,367,85.61a171.49,171.49,0,0,1,26.88,32.76c30.36,49.2,27.48,111.11,3.84,147.59-34.44,53-111.35,71.27-159,24.84a84.19,84.19,0,0,1-25.56-59,74.05,74.05,0,0,1,6.24-31c1.68-3.84,13.08-25.67,18.24-24.59-13.08-2.76-37.55,2.64-54.71,28.19-15.36,22.92-14.52,58.2-5,83.28a132.85,132.85,0,0,1-12.12-39.24c-12.24-82.55,43.31-153,94.31-170.51-27.48-24-96.47-22.31-147.71,15.36-29.88,22-51.23,53.16-62.51,90.36,1.68-20.88,9.6-52.08,25.8-83.88-17.16,8.88-39,37-49.8,62.88-15.6,37.43-21,82.19-16.08,124.79.36,3.24.72,6.36,1.08,9.6,19.92,117.11,122,206.38,244.78,206.38C392.77,503.42,504,392.19,504,255,503.88,250.48,503.76,245.92,503.52,241.48Z"&gt;&lt;/path&gt;&lt;/svg&gt;  [https://gianluca.statistica.it](https://gianluca.statistica.it)
+&lt;svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="position:relative;display:inline-block;top:.1em;fill:#EA7600;height:0.8em;"&gt;  [ comment ]  &lt;path d="M503.52,241.48c-.12-1.56-.24-3.12-.24-4.68v-.12l-.36-4.68v-.12a245.86,245.86,0,0,0-7.32-41.15c0-.12,0-.12-.12-.24l-1.08-4c-.12-.24-.12-.48-.24-.6-.36-1.2-.72-2.52-1.08-3.72-.12-.24-.12-.6-.24-.84-.36-1.2-.72-2.4-1.08-3.48-.12-.36-.24-.6-.36-1-.36-1.2-.72-2.28-1.2-3.48l-.36-1.08c-.36-1.08-.84-2.28-1.2-3.36a8.27,8.27,0,0,0-.36-1c-.48-1.08-.84-2.28-1.32-3.36-.12-.24-.24-.6-.36-.84-.48-1.2-1-2.28-1.44-3.48,0-.12-.12-.24-.12-.36-1.56-3.84-3.24-7.68-5-11.4l-.36-.72c-.48-1-.84-1.8-1.32-2.64-.24-.48-.48-1.08-.72-1.56-.36-.84-.84-1.56-1.2-2.4-.36-.6-.6-1.2-1-1.8s-.84-1.44-1.2-2.28c-.36-.6-.72-1.32-1.08-1.92s-.84-1.44-1.2-2.16a18.07,18.07,0,0,0-1.2-2c-.36-.72-.84-1.32-1.2-2s-.84-1.32-1.2-2-.84-1.32-1.2-1.92-.84-1.44-1.32-2.16a15.63,15.63,0,0,0-1.2-1.8L463.2,119a15.63,15.63,0,0,0-1.2-1.8c-.48-.72-1.08-1.56-1.56-2.28-.36-.48-.72-1.08-1.08-1.56l-1.8-2.52c-.36-.48-.6-.84-1-1.32-1-1.32-1.8-2.52-2.76-3.72a248.76,248.76,0,0,0-23.51-26.64A186.82,186.82,0,0,0,412,62.46c-4-3.48-8.16-6.72-12.48-9.84a162.49,162.49,0,0,0-24.6-15.12c-2.4-1.32-4.8-2.52-7.2-3.72a254,254,0,0,0-55.43-19.56c-1.92-.36-3.84-.84-5.64-1.2h-.12c-1-.12-1.8-.36-2.76-.48a236.35,236.35,0,0,0-38-4H255.14a234.62,234.62,0,0,0-45.48,5c-33.59,7.08-63.23,21.24-82.91,39-1.08,1-1.92,1.68-2.4,2.16l-.48.48H124l-.12.12.12-.12a.12.12,0,0,0,.12-.12l-.12.12a.42.42,0,0,1,.24-.12c14.64-8.76,34.92-16,49.44-19.56l5.88-1.44c.36-.12.84-.12,1.2-.24,1.68-.36,3.36-.72,5.16-1.08.24,0,.6-.12.84-.12C250.94,20.94,319.34,40.14,367,85.61a171.49,171.49,0,0,1,26.88,32.76c30.36,49.2,27.48,111.11,3.84,147.59-34.44,53-111.35,71.27-159,24.84a84.19,84.19,0,0,1-25.56-59,74.05,74.05,0,0,1,6.24-31c1.68-3.84,13.08-25.67,18.24-24.59-13.08-2.76-37.55,2.64-54.71,28.19-15.36,22.92-14.52,58.2-5,83.28a132.85,132.85,0,0,1-12.12-39.24c-12.24-82.55,43.31-153,94.31-170.51-27.48-24-96.47-22.31-147.71,15.36-29.88,22-51.23,53.16-62.51,90.36,1.68-20.88,9.6-52.08,25.8-83.88-17.16,8.88-39,37-49.8,62.88-15.6,37.43-21,82.19-16.08,124.79.36,3.24.72,6.36,1.08,9.6,19.92,117.11,122,206.38,244.78,206.38C392.77,503.42,504,392.19,504,255,503.88,250.48,503.76,245.92,503.52,241.48Z"&gt;&lt;/path&gt;&lt;/svg&gt;  [https://egon.stats.ucl.ac.uk/research/statistics-health-economics/](https://egon.stats.ucl.ac.uk/research/statistics-health-economics/)
+&lt;svg viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg" style="position:relative;display:inline-block;top:.1em;fill:black;height:0.8em;"&gt;  [ comment ]  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt;  [https://github.com/giabaio](https://github.com/giabaio)
+&lt;svg viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg" style="position:relative;display:inline-block;top:.1em;fill:black;height:0.8em;"&gt;  [ comment ]  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt;  [https://github.com/StatisticsHealthEconomics](https://github.com/StatisticsHealthEconomics)
+&lt;svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="position:relative;display:inline-block;top:.1em;fill:#00acee;height:0.8em;"&gt;  [ comment ]  &lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"&gt;&lt;/path&gt;&lt;/svg&gt;  [@gianlubaio](https://twitter.com/gianlubaio)
+]
+
+### MRC Biostatistics Unit Seminars, MRC Biostatistics Cambridge 
+&lt;!-- Can also separate the various components of the extra argument 'params', eg as in 
+### MRC Biostatistics Unit Seminars, MRC Biostatistics Cambridge, 9 November 2021, One year of Covid in 5 countries
+--&gt;
+
+9 November 2021
+
+.logo-stats[]
+
+&lt;!-- This adds a footer (optional and with other possibilities...) 
+.footer-left[ 
+&lt;span style="position: relative; bottom: 0px; color: #D5D5D5;"&gt; &amp;nbsp; &amp;copy; Gianluca Baio (UCL)&lt;/span&gt;
+]
+--&gt;
+
+&lt;p style="position: absolute; top:75%; left:2.5%; font-family: Nanum Pen Script; font-size:85%; text-decoration: none; color: #000; background: #ffc; display: block; height:6.3em; width:6.3em; padding: .5em; box-shadow: 5px 5px 7px rgba(33,33,33,.7); transform: rotate(-8deg); border-bottom-right-radius: 60px 5px;"&gt;Check out our departmental podcast "Random Talks" on Soundcloud!&amp;nbsp;&lt;a href="https://soundcloud.com/uclsound/sets/sample-space"; title="Random Talks"&gt;&lt;svg viewBox="0 0 640 512" style="position:relative;display:inline-block;top:.1em;fill:#FE5000;height:0.8em;bottom:1em;" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;path d="M111.4 256.3l5.8 65-5.8 68.3c-.3 2.5-2.2 4.4-4.4 4.4s-4.2-1.9-4.2-4.4l-5.6-68.3 5.6-65c0-2.2 1.9-4.2 4.2-4.2 2.2 0 4.1 2 4.4 4.2zm21.4-45.6c-2.8 0-4.7 2.2-5 5l-5 105.6 5 68.3c.3 2.8 2.2 5 5 5 2.5 0 4.7-2.2 4.7-5l5.8-68.3-5.8-105.6c0-2.8-2.2-5-4.7-5zm25.5-24.1c-3.1 0-5.3 2.2-5.6 5.3l-4.4 130 4.4 67.8c.3 3.1 2.5 5.3 5.6 5.3 2.8 0 5.3-2.2 5.3-5.3l5.3-67.8-5.3-130c0-3.1-2.5-5.3-5.3-5.3zM7.2 283.2c-1.4 0-2.2 1.1-2.5 2.5L0 321.3l4.7 35c.3 1.4 1.1 2.5 2.5 2.5s2.2-1.1 2.5-2.5l5.6-35-5.6-35.6c-.3-1.4-1.1-2.5-2.5-2.5zm23.6-21.9c-1.4 0-2.5 1.1-2.5 2.5l-6.4 57.5 6.4 56.1c0 1.7 1.1 2.8 2.5 2.8s2.5-1.1 2.8-2.5l7.2-56.4-7.2-57.5c-.3-1.4-1.4-2.5-2.8-2.5zm25.3-11.4c-1.7 0-3.1 1.4-3.3 3.3L47 321.3l5.8 65.8c.3 1.7 1.7 3.1 3.3 3.1 1.7 0 3.1-1.4 3.1-3.1l6.9-65.8-6.9-68.1c0-1.9-1.4-3.3-3.1-3.3zm25.3-2.2c-1.9 0-3.6 1.4-3.6 3.6l-5.8 70 5.8 67.8c0 2.2 1.7 3.6 3.6 3.6s3.6-1.4 3.9-3.6l6.4-67.8-6.4-70c-.3-2.2-2-3.6-3.9-3.6zm241.4-110.9c-1.1-.8-2.8-1.4-4.2-1.4-2.2 0-4.2.8-5.6 1.9-1.9 1.7-3.1 4.2-3.3 6.7v.8l-3.3 176.7 1.7 32.5 1.7 31.7c.3 4.7 4.2 8.6 8.9 8.6s8.6-3.9 8.6-8.6l3.9-64.2-3.9-177.5c-.4-3-2-5.8-4.5-7.2zm-26.7 15.3c-1.4-.8-2.8-1.4-4.4-1.4s-3.1.6-4.4 1.4c-2.2 1.4-3.6 3.9-3.6 6.7l-.3 1.7-2.8 160.8s0 .3 3.1 65.6v.3c0 1.7.6 3.3 1.7 4.7 1.7 1.9 3.9 3.1 6.4 3.1 2.2 0 4.2-1.1 5.6-2.5 1.7-1.4 2.5-3.3 2.5-5.6l.3-6.7 3.1-58.6-3.3-162.8c-.3-2.8-1.7-5.3-3.9-6.7zm-111.4 22.5c-3.1 0-5.8 2.8-5.8 6.1l-4.4 140.6 4.4 67.2c.3 3.3 2.8 5.8 5.8 5.8 3.3 0 5.8-2.5 6.1-5.8l5-67.2-5-140.6c-.2-3.3-2.7-6.1-6.1-6.1zm376.7 62.8c-10.8 0-21.1 2.2-30.6 6.1-6.4-70.8-65.8-126.4-138.3-126.4-17.8 0-35 3.3-50.3 9.4-6.1 2.2-7.8 4.4-7.8 9.2v249.7c0 5 3.9 8.6 8.6 9.2h218.3c43.3 0 78.6-35 78.6-78.3.1-43.6-35.2-78.9-78.5-78.9zm-296.7-60.3c-4.2 0-7.5 3.3-7.8 7.8l-3.3 136.7 3.3 65.6c.3 4.2 3.6 7.5 7.8 7.5 4.2 0 7.5-3.3 7.5-7.5l3.9-65.6-3.9-136.7c-.3-4.5-3.3-7.8-7.5-7.8zm-53.6-7.8c-3.3 0-6.4 3.1-6.4 6.7l-3.9 145.3 3.9 66.9c.3 3.6 3.1 6.4 6.4 6.4 3.6 0 6.4-2.8 6.7-6.4l4.4-66.9-4.4-145.3c-.3-3.6-3.1-6.7-6.7-6.7zm26.7 3.4c-3.9 0-6.9 3.1-6.9 6.9L227 321.3l3.9 66.4c.3 3.9 3.1 6.9 6.9 6.9s6.9-3.1 6.9-6.9l4.2-66.4-4.2-141.7c0-3.9-3-6.9-6.9-6.9z"&gt;&lt;/path&gt;
+&lt;/svg&gt;&lt;/a&gt;&amp;nbsp;&lt;/p&gt;
+
+
+&lt;p style="position: absolute; top:53%; left:6.5%; font-family: Nanum Pen Script; font-size:85%; text-decoration: none; color: #000; background: #ffc; display: block; height:6.3em; width:6.3em; padding: .5em; box-shadow: 5px 5px 7px rgba(33,33,33,.7); transform: rotate(6deg); border-bottom-right-radius: 60px 5px;"&gt;Follow our departmental social media accounts&amp;nbsp;&lt;a href="https://twitter.com/stats_ucl"; title="@stats_UCL"&gt;&lt;svg viewBox="0 0 512 512" style="position:relative;display:inline-block;top:.1em;fill:#00acee;height:0.8em;bottom:1em;" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"&gt;&lt;/path&gt;
+&lt;/svg&gt;&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;a href="https://www.linkedin.com/in/statistical-science-ucl-906b9a201"; title="LinkedIn"&gt;&lt;svg viewBox="0 0 448 512" style="position:relative;display:inline-block;top:.1em;fill:#2867b2;height:0.8em;bottom:1em;" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"&gt;&lt;/path&gt;
+&lt;/svg&gt;&lt;/a&gt;&amp;nbsp;&lt;/p&gt;
+
+---
+
+layout: true  
+
+.my-footer[ 
+.alignleft[ 
+&amp;nbsp; &amp;copy; Gianluca Baio (UCL) | &amp;nbsp;&lt;a href="https://twitter.com/giabaio"; title="Follow me on Twitter"&gt;&lt;svg viewBox="0 0 512 512" style="position:relative;display:inline-block;top:.1em;fill:#bcc0c4;height:0.8em;bottom:1em;" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"&gt;&lt;/path&gt;
+&lt;/svg&gt;&lt;/a&gt;&amp;nbsp; &amp;nbsp;&lt;a href="https://github.com/giabaio"; title="Check out my repos"&gt;&lt;svg viewBox="0 0 496 512" style="position:relative;display:inline-block;top:.1em;fill:#bcc0c4;height:0.8em;" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;
+&lt;/svg&gt;&lt;/a&gt;&amp;nbsp; &amp;nbsp;&lt;a href="mailto:g.baio@ucl.ac.uk"; title="Email me"&gt;&lt;svg viewBox="0 0 512 512" style="position:relative;display:inline-block;top:.1em;fill:#bcc0c4;height:0.8em;" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"&gt;&lt;/path&gt;
+&lt;/svg&gt;&lt;/a&gt;&amp;nbsp; &amp;nbsp;&lt;a href="https://gianluca.statistica.it"; title="Visit my website"&gt;&lt;svg viewBox="0 0 512 512" style="position:relative;display:inline-block;top:.1em;fill:#bcc0c4;height:0.8em;" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;path d="M503.52,241.48c-.12-1.56-.24-3.12-.24-4.68v-.12l-.36-4.68v-.12a245.86,245.86,0,0,0-7.32-41.15c0-.12,0-.12-.12-.24l-1.08-4c-.12-.24-.12-.48-.24-.6-.36-1.2-.72-2.52-1.08-3.72-.12-.24-.12-.6-.24-.84-.36-1.2-.72-2.4-1.08-3.48-.12-.36-.24-.6-.36-1-.36-1.2-.72-2.28-1.2-3.48l-.36-1.08c-.36-1.08-.84-2.28-1.2-3.36a8.27,8.27,0,0,0-.36-1c-.48-1.08-.84-2.28-1.32-3.36-.12-.24-.24-.6-.36-.84-.48-1.2-1-2.28-1.44-3.48,0-.12-.12-.24-.12-.36-1.56-3.84-3.24-7.68-5-11.4l-.36-.72c-.48-1-.84-1.8-1.32-2.64-.24-.48-.48-1.08-.72-1.56-.36-.84-.84-1.56-1.2-2.4-.36-.6-.6-1.2-1-1.8s-.84-1.44-1.2-2.28c-.36-.6-.72-1.32-1.08-1.92s-.84-1.44-1.2-2.16a18.07,18.07,0,0,0-1.2-2c-.36-.72-.84-1.32-1.2-2s-.84-1.32-1.2-2-.84-1.32-1.2-1.92-.84-1.44-1.32-2.16a15.63,15.63,0,0,0-1.2-1.8L463.2,119a15.63,15.63,0,0,0-1.2-1.8c-.48-.72-1.08-1.56-1.56-2.28-.36-.48-.72-1.08-1.08-1.56l-1.8-2.52c-.36-.48-.6-.84-1-1.32-1-1.32-1.8-2.52-2.76-3.72a248.76,248.76,0,0,0-23.51-26.64A186.82,186.82,0,0,0,412,62.46c-4-3.48-8.16-6.72-12.48-9.84a162.49,162.49,0,0,0-24.6-15.12c-2.4-1.32-4.8-2.52-7.2-3.72a254,254,0,0,0-55.43-19.56c-1.92-.36-3.84-.84-5.64-1.2h-.12c-1-.12-1.8-.36-2.76-.48a236.35,236.35,0,0,0-38-4H255.14a234.62,234.62,0,0,0-45.48,5c-33.59,7.08-63.23,21.24-82.91,39-1.08,1-1.92,1.68-2.4,2.16l-.48.48H124l-.12.12.12-.12a.12.12,0,0,0,.12-.12l-.12.12a.42.42,0,0,1,.24-.12c14.64-8.76,34.92-16,49.44-19.56l5.88-1.44c.36-.12.84-.12,1.2-.24,1.68-.36,3.36-.72,5.16-1.08.24,0,.6-.12.84-.12C250.94,20.94,319.34,40.14,367,85.61a171.49,171.49,0,0,1,26.88,32.76c30.36,49.2,27.48,111.11,3.84,147.59-34.44,53-111.35,71.27-159,24.84a84.19,84.19,0,0,1-25.56-59,74.05,74.05,0,0,1,6.24-31c1.68-3.84,13.08-25.67,18.24-24.59-13.08-2.76-37.55,2.64-54.71,28.19-15.36,22.92-14.52,58.2-5,83.28a132.85,132.85,0,0,1-12.12-39.24c-12.24-82.55,43.31-153,94.31-170.51-27.48-24-96.47-22.31-147.71,15.36-29.88,22-51.23,53.16-62.51,90.36,1.68-20.88,9.6-52.08,25.8-83.88-17.16,8.88-39,37-49.8,62.88-15.6,37.43-21,82.19-16.08,124.79.36,3.24.72,6.36,1.08,9.6,19.92,117.11,122,206.38,244.78,206.38C392.77,503.42,504,392.19,504,255,503.88,250.48,503.76,245.92,503.52,241.48Z"&gt;&lt;/path&gt;
+&lt;/svg&gt;&lt;/a&gt;&amp;nbsp; 
+]
+.aligncenter[
+One year of Covid in 5 countries 
+]
+.alignright[
+MRC Biostatistics Unit Seminars,  9 Nov 2021
+]
+] 
+
+---
+
+# Acknowledgements 
+
+### This is joint work with .alignright[&lt;svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="height:1em;fill:currentColor;position:relative;display:inline-block;top:.1em;"&gt;  &lt;g groupmode="layer" id="layer6" label="icon"&gt;    &lt;path style="stroke-width:0.07717" d="m 115.59247,222.50738 c -9.72601,0 -18.734334,7.07397 -24.986084,14.41694 -5.061076,5.95394 -7.591049,15.13238 -7.591049,22.77486 0,7.6402 2.870733,16.13879 7.931808,22.09274 6.152292,7.34297 12.778135,12.37522 22.603045,12.37522 8.83314,0 19.33786,-3.70766 25.389,-9.76105 6.1523,-6.05338 11.26931,-16.21737 11.26931,-25.04826 0,-8.73142 -2.39548,-19.18696 -8.54776,-25.24039 -6.15229,-6.15455 -17.33741,-11.61061 -26.06883,-11.61061 z m 174.6438,2.39944 c -10.12046,0 -18.35798,3.98058 -24.70919,11.93724 -5.15827,6.38628 -7.73967,13.66255 -7.73967,21.82831 0,8.27088 2.5814,15.59914 7.73967,21.98538 6.35064,7.95667 14.58873,11.93729 24.70919,11.93729 9.03149,0 16.67002,-3.25109 22.9212,-9.74241 6.25399,-6.59703 9.37846,-14.65259 9.37846,-24.18026 0,-9.422 -3.17646,-17.37639 -9.52708,-23.86775 -6.2495,-6.59477 -13.8428,-9.89721 -22.77258,-9.89721 z M 255.99998,7.9999981 C 119.03396,7.9999981 7.9999985,119.03394 7.9999985,255.99998 7.9999985,392.96602 119.03396,504 255.99998,504 392.96606,504 504,392.96602 504,255.99998 504,119.03394 392.96606,7.9999981 255.99998,7.9999981 Z M 197.17431,331.79065 h -45.93563 v -18.69931 c -4.66437,5.85506 -15.63869,11.82369 -20.40025,14.50172 -8.33473,4.66267 -19.65377,7.70067 -30.27265,7.70067 -17.167865,0 -32.44885,-5.425 -45.844653,-17.23173 -15.977193,-14.0903 -23.483472,-35.63322 -23.483472,-58.85447 0,-23.61798 8.186103,-42.47212 24.559999,-56.56242 12.999092,-11.21393 28.896046,-20.18949 45.766106,-20.18949 9.82264,0 21.93961,0.88269 30.57214,5.04865 4.96218,2.38076 13.84449,7.98548 19.10448,13.44381 v -98.50164 h 45.93564 v 229.34421 z m 157.21544,-21.13999 c -15.28099,17.58718 -36.66682,26.38303 -64.15348,26.38303 -27.58613,0 -49.01942,-8.79585 -64.30436,-26.38303 -12.60069,-14.44803 -18.90387,-32.19228 -18.90387,-53.23507 0,-18.94908 6.35065,-35.75132 19.0525,-50.4079 15.37988,-17.69285 37.26185,-26.54011 65.64139,-26.54011 26.09766,0 46.93585,8.84558 62.51694,26.54011 12.70185,14.44806 19.05247,31.66734 19.05247,51.66468 0.003,20.20586 -6.29921,37.53085 -18.90159,51.97886 z m 38.76899,-199.21794 c 5.35888,-5.35888 11.85868,-8.03746 19.49892,-8.03746 7.64024,0 14.14005,2.67858 19.49893,8.03746 5.35888,5.25945 8.03746,11.70955 8.03746,19.35034 0,7.73965 -2.67858,14.28864 -8.03746,19.64753 -5.25944,5.25944 -11.75925,7.8883 -19.49893,7.8883 -7.64247,0 -14.14227,-2.67861 -19.49892,-8.0375 -5.2594,-5.35885 -7.88829,-11.85871 -7.88829,-19.49892 -0.003,-7.6402 2.62889,-14.0903 7.88829,-19.35029 z m 43.91029,220.24265 H 388.24626 V 185.84118 h 48.82277 z" id="path2"&gt;&lt;/path&gt;  &lt;/g&gt;&lt;/svg&gt; [Konstantinoudis et al (2021)](https://www.medrxiv.org/content/10.1101/2021.10.18.21264686v1)]
+
+#### Core team
+- [Marta Blangiardo](https://www.imperial.ac.uk/people/m.blangiardo) (Imperial College London)
+- [Michela Cameletti](https://sites.google.com/site/michelacameletti) (University of Bergamo, Italy)
+- [Monica Pirani](https://www.imperial.ac.uk/people/monica.pirani) (Imperial College London)
+- [Garyfallos Konstantinoudis](https://www.imperial.ac.uk/people/g.konstantinoudis) (Imperial College London)
+- [Virgilio Gómez-Rubio](https://becarioprecario.github.io/) (University of Castilla-La Mancha, Spain)
+
+#### Other colleagues 
+- Amparo Larrauri, Imma León (Spain); Julien Riou, Matthias Egger (Switzerland); Paolo Vineis (UK/Italy)
+
+### Extra stuff...
+
+- &lt;svg viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg" style="height:1em;fill:currentColor;position:relative;display:inline-block;top:.1em;"&gt;  [ comment ]  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; The datasets and code used in the analysis is available at [https://github.com/gkonstantinoudis/ExcessDeathsCOVID](https://github.com/gkonstantinoudis/ExcessDeathsCOVID)
+- &lt;svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" style="height:1em;fill:currentColor;position:relative;display:inline-block;top:.1em;"&gt;  [ comment ]  &lt;path d="M624 416H381.54c-.74 19.81-14.71 32-32.74 32H288c-18.69 0-33.02-17.47-32.77-32H16c-8.8 0-16 7.2-16 16v16c0 35.2 28.8 64 64 64h512c35.2 0 64-28.8 64-64v-16c0-8.8-7.2-16-16-16zM576 48c0-26.4-21.6-48-48-48H112C85.6 0 64 21.6 64 48v336h512V48zm-64 272H128V64h384v256z"&gt;&lt;/path&gt;&lt;/svg&gt; The results are also provided in a ShinyApp available at [http://atlasmortalidad.uclm.es/excess/](http://atlasmortalidad.uclm.es/excess/)
+
+&lt;span style="display:block; margin-top: 50px ;"&gt;&lt;/span&gt;
+
+--
+
+.content-box-grey[
+.center[I'll take all the credit if you like this, but the blame is all on them if you don't... 😉]
+]
+
+---
+
+# *Nothing can be said to be certain, except death and taxes...*
+
+.pull-left[
+&lt;center&gt;&lt;img src=./img/politico.png width='60%' title=''&gt;&lt;/center&gt;
+]
+
+.pull-right[
+
+&lt;center&gt;&lt;img src=./img/art-of-stats.jpg width='35%' title=''&gt;&lt;/center&gt;
+
+&gt; "*But in the US each state can have its own legal definition of death, and although the Uniform Declaration of Death Act was introduced in 1981 to try to estabilsh a common model. Some small differences remain. Someone wha had been decleared dead in Alabama could, at least in principle, cease to be legally dead were they across the border in Florida, where the registration must be made by two qualified doctors*"
+
+]
+
+---
+
+# Background
+
+## Why excess mortality?
+
+- The total impact of the COVID-19 pandemic on mortality should be the least controversial outcome to measure. But this is complicated by
+
+   - Lack of real time cause specific data
+   - Quality of coding on death certificate
+
+- Excess mortality during the COVID-19 pandemic is the combination of deaths caused, or contributed to, by infection with SARS-CoV-2 plus deaths that resulted from the widespread behavioural, social and healthcare changes that accompanied national responses to the emergency.
+
+## Focus
+
+- Much of the existing literature focus on national data
+
+- In order to understand the dynamics of the pandemic there is the need to move to a sub-national level
+  - Differences in the socio-demographics/environmental characteristics/healthcare provision
+
+- Limited contribution, mainly for large regions
+
+---
+
+# Data
+
+## All cause mortality
+
+- Data for all-cause deaths and population counts from official sources in the 5 countries
+
+   - Italy
+   - England
+   - Spain
+   - Switzerland
+   - Greece 
+   
+--
+
+- Geographical resolution defined at [*Nomenclature of Territorial Units for Statistics*](https://ec.europa.eu/eurostat/web/nuts/background) (NUTS)
+
+   - Specifically NUTS 3 level (small regions for specific diagnoses) 
+
+   - Some results aggregated back at NUTS2 level (basic regions for the application of regional policies) 
+   
+   - National level
+
+- Grouped by 
+
+   - Sex, age, week and NUTS3 region defined as areas with a population varying from 150,000 to 800,000, for 2015-2020 
+
+--
+
+- Use of [*International Organization for Standardization*](https://www.iso.org/home.html) (ISO) week calendar
+
+   - Seven consecutive days beginning with a Monday and ending with a Sunday 
+   
+- Mortality and population data by age groups 
+
+   - &lt;40, 40-59, 60-69, 70-79 and 80 years and above 
+   
+   - Maintain consistency between countries and the literature
+
+---
+
+# Data
+
+## Population at risk
+
+- Official **yearly** estimates for the population for 2014-2020
+
+   - Directly available for Greece, Spain and Italy at 1 January of every year
+   
+   - For Switzerland, available at 31 December 
+   
+   - England a bit different... (more on this later)
+   
+--
+   
+- Two-steps linear interpolation to predict the population at 1 January 2021
+
+   1. Use data for 1 January 2015 to 1 January 2020 to predict population counts by age, sex and NUTS3 region at 1 January 2021
+   
+   2. Calculate **weekly** 2015-2020 population by linear interpolation of estimates on 1 January 2020 and 1 January 2021, by age, sex and NUTS3
+
+&lt;span style="display:block; margin-top: 20px ;"&gt;&lt;/span&gt;
+
+--
+
+&lt;svg viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg" style="position:relative;display:inline-block;top:.1em;fill:red;height:1.2em;"&gt;  [ comment ]  &lt;path d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"&gt;&lt;/path&gt;&lt;/svg&gt; For England, only mid-year figures are available
+   - But in 2020 these are affected by COVID-19 deaths during the first wave (March-May)
+   
+   - Use yearly data for 2015-2019 to estimate the mid-year population in 2020 using linear interpolation
+   
+   - Then use the estimated population at 1 January 2020 and linear interpolation to obtain the **weekly** population for 2015-2019 
+   
+   - Use weekly data for 2019 as a proxy for 2020
+
+
+---
+
+# Data
+
+## Ambient temperature
+
+- Typically affects death rates `\(\Rightarrow\)` use data on temperature from the [ERA5](https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5) reanalysis dataset of the [Copernicus climate data](https://climate.copernicus.eu/)
+   
+   - Global in situ and satellite measurements
+   
+   - Provides hourly estimates
+   
+   - Available measurements compatible with spatial ***and*** temporal resolution for our analysis
+
+--
+   
+- For each centroid of the grid cells (at `\(\0.\2\5^\circ\times \0.\2\5^\circ\)` resolution) that fall into the NUTS3 regions, calculate the daily mean temperature during 2015-2020 and then the weekly mean to align temperature and mortality data 
+
+- Additionally, as mortality from all causes can be different during national holidays, we also included a binary variable taking the value 1 if the week contains a public holiday and 0 otherwise
+
+---
+
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+.content-box-beamer[
+### Main objective
+
+.large[**Predict deaths in 2020 in the .red[hypothetical] scenario of no pandemic**]
+
+]
+
+&lt;span style="display:block; margin-top: 50px ;"&gt;&lt;/span&gt;
+
+--
+
+.content-box-beamer[
+### Notation
+
+.normal[
+For each country, define separately
+
+- `\(y_{jtsk}=\)` number of all-cause deaths in week `\(j\)` of year `\(t\)` for NUTS3 area `\(s\)` and age-sex group `\(k\)`
+
+     `\(k=1,\ldots,K=10=\)` age-sex group (male/female and \\(&lt;\\)40, 40-59, 60-69, 70-79, \\(\geq\\)80)
+
+- `\(P_{jtsk}=\)` population at risk in week `\(j\)` of year `\(t\)` for NUTS3 area `\(s\)` and age-sex group `\(k\)`
+
+- `\(\rho_{jtsk}=\)` the risk of death (mortality rate) in week `\(j\)` of year `\(t\)` for NUTS3 area `\(s\)` and age-sex group `\(k\)`
+
+- `\(z_{j}=\)` dummy variable for public holiday
+
+- `\(x_{jts}=\)` average weekly temperature in each area
+]
+]
+
+&lt;span style="display:block; margin-top: 50px ;"&gt;&lt;/span&gt;
+
+--
+
+**NB**: Main analysis excludes younger groups
+
+   - Based on cross-validation and poor predictive performance
+   - Not too surprising &amp;ndash; less affected in the earlier waves of the pandemic...
+
+---
+
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+`\begin{align*}
+    y_{jtsk}\sim \dpois\left(\rho_{jtsk}P_{jtsk}\right)  \qquad \qquad 
+    \log \left(\rho_{jtsk} \right) = \beta_{0t} + \beta_1 z_{j} + f(x_{jts}) + b_s + w_j 
+\end{align*}`
+
+---
+
+count: false
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+`\begin{align*}
+    y_{jtsk}\sim \dpois\left(\rho_{jtsk}P_{jtsk}\right)  \qquad \qquad 
+    \log \left(\rho_{jtsk} \right) = {\color{blue}\beta_{0t}} + {\color{orange}\beta_1} z_{j} + f(x_{jts}) + b_s + w_j 
+\end{align*}`
+
+- `\({\color{blue}\beta_{0t}=\beta_0+\varepsilon_t}\)`: year-specific intercept    
+
+   - `\(\beta_0\sim \dnorm(\0, \1\0^{\3})\)`: global intercept 
+   - `\(\varepsilon_t\sim \dnorm(\0,\tau_\varepsilon^{-1})\)`: unstructured random effect 
+   
+- `\(\color{orange}\beta_1\sim \dnorm(\0, \1\0^{\3})\)`: effect of public holidays 
+
+---
+
+count: false
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+`\begin{align*}
+    y_{jtsk}\sim \dpois\left(\rho_{jtsk}P_{jtsk}\right)  \qquad \qquad 
+    \log \left(\rho_{jtsk} \right) = \beta_{0t} + \beta_1 z_{j} + {\color{red}f(x_{jts})} + b_s + w_j 
+\end{align*}`
+
+.navbargrey[
+- `\(\beta_{0t}=\beta_0+\varepsilon_t\)`: year-specific intercept    
+
+   - `\(\beta_0\sim \dnorm(\0, \1\0^{\3})\)`: global intercept 
+   - `\(\varepsilon_t\sim \dnorm(\0,\tau_\varepsilon^{-1})\)`: unstructured random effect 
+   
+- `\(\beta_1\sim \dnorm(\0, \1\0^{\3})\)`: effect of public holidays
+]
+
+**Non-linear effect of average weekly temperature `\(\color{red}f(x_{jts})\)`** 
+- RW2 model: `\(x_{jts} \mid x_{(j-1)ts}, x_{(j-2)ts}, \tau_x \sim \dnorm\left(2x_{(j-1)ts}+x_{(j-2)ts},\tau_x^{-1}\right)\)` 
+
+---
+
+count: false
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+`\begin{align*}
+    y_{jtsk}\sim \dpois\left(\rho_{jtsk}P_{jtsk}\right)  \qquad \qquad
+    \log \left(\rho_{jtsk} \right) = \beta_{0t} + \beta_1 z_{j} + f(x_{jts}) + {\color{magenta}b_s} + w_j 
+\end{align*}`
+
+.navbargrey[
+- `\(\beta_{0t}=\beta_0+\varepsilon_t\)`: year-specific intercept    
+
+   - `\(\beta_0\sim \dnorm(\0, \1\0^{\3})\)`: global intercept 
+   - `\(\varepsilon_t\sim \dnorm(\0,\tau_\varepsilon^{-1})\)`: unstructured random effect 
+   
+- `\(\beta_1\sim \dnorm(\0, \1\0^{\3})\)`: effect of public holidays
+
+**Non-linear effect of average weekly temperature `\(f(x_{jts})\)`**
+- RW2 model: `\(x_{jts} \mid x_{(j-1)ts}, x_{(j-2)ts}, \tau_x \sim \dnorm\left(2x_{(j-1)ts}+x_{(j-2)ts},\tau_x^{-1}\right)\)` 
+]
+
+**Spatial component**
+- `\({\color{magenta}b_s=\frac{1}{\sqrt{\tau_b}}\left(\sqrt{1-\phi}\tau_v^{0.5} v_s+\sqrt{\phi}\tau_u^{0.5} u_s\right)}\)`: Besag-York-Mollié (BYM)-type model 
+
+   - `\(v_s\sim \dnorm(0,\tau_v^{-1})\)`: unstructured random effect
+   - `\(u_s \mid \bm{u}_{-s}\sim \dnorm\left(\frac{\sum_{r=1}^Rn_{rs}u_r}{\sum_{r=1}^R n_{rs}},\frac{1}{\tau_u \sum_{r=1}^R n_{rs}}\right)\)`: spatially structured random effect 
+   - `\(\phi \in [0,1]\)`: mixing parameter (measures proportion of variance explained by the structured effect)
+
+---
+
+count: false
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+`\begin{align*}
+    y_{jtsk}\sim \dpois\left(\rho_{jtsk}P_{jtsk}\right)  \qquad \qquad 
+    \log \left(\rho_{jtsk} \right) = \beta_{0t} + \beta_1 z_{j} + f(x_{jts}) + b_s + {\color{olive}w_j} 
+\end{align*}`
+
+.navbargrey[
+- `\(\beta_{0t}=\beta_0+\varepsilon_t\)`: year-specific intercept    
+
+   - `\(\beta_0\sim \dnorm(\0, \1\0^{\3})\)`: global intercept 
+   - `\(\varepsilon_t\sim \dnorm(\0,\tau_\varepsilon^{-1})\)`: unstructured random effect 
+   
+- `\(\beta_1\sim \dnorm(\0, \1\0^{\3})\)`: effect of public holidays
+
+**Non-linear effect of average weekly temperature `\(f(x_{jts})\)`**
+- RW2 model: `\(x_{jts} \mid x_{(j-1)ts}, x_{(j-2)ts}, \tau_x \sim \dnorm\left(2x_{(j-1)ts}+x_{(j-2)ts},\tau_x^{-1}\right)\)` 
+
+**Spatial component**
+- `\(b_s=\frac{1}{\sqrt{\tau_b}}\left(\sqrt{1-\phi}\tau_v^{0.5} v_s+\sqrt{\phi}\tau_u^{0.5} u_s\right)\)`: Besag-York-Mollié (BYM)-type model 
+
+   - `\(v_s\sim \dnorm(0,\tau_v^{-1})\)`: unstructured random effect
+   - `\(u_s \mid \bm{u}_{-s}\sim \dnorm\left(\frac{\sum_{r=1}^Rn_{rs}u_r}{\sum_{r=1}^R n_{rs}},\frac{1}{\tau_u \sum_{r=1}^R n_{rs}}\right)\)`: spatially structured random effect 
+   - `\(\phi \in [0,1]\)`: mixing parameter (measures proportion of variance explained by the structured effect)
+]
+
+**Temporal component (non-linear weekly effect)**
+- RW1 model (accounts for seasonality): `\(\color{olive}w_j \mid w_{j-1}, \tau_w \sim \dnorm(w_{j-1},\tau_w^{-1})\)` 
+
+---
+
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+## Priors (hyperparameters)
+
+All the hyperparameters are modelled using &lt;svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="height:1em;fill:currentColor;position:relative;display:inline-block;top:.1em;"&gt;  &lt;g groupmode="layer" id="layer6" label="icon"&gt;    &lt;path style="stroke-width:0.07717" d="m 115.59247,222.50738 c -9.72601,0 -18.734334,7.07397 -24.986084,14.41694 -5.061076,5.95394 -7.591049,15.13238 -7.591049,22.77486 0,7.6402 2.870733,16.13879 7.931808,22.09274 6.152292,7.34297 12.778135,12.37522 22.603045,12.37522 8.83314,0 19.33786,-3.70766 25.389,-9.76105 6.1523,-6.05338 11.26931,-16.21737 11.26931,-25.04826 0,-8.73142 -2.39548,-19.18696 -8.54776,-25.24039 -6.15229,-6.15455 -17.33741,-11.61061 -26.06883,-11.61061 z m 174.6438,2.39944 c -10.12046,0 -18.35798,3.98058 -24.70919,11.93724 -5.15827,6.38628 -7.73967,13.66255 -7.73967,21.82831 0,8.27088 2.5814,15.59914 7.73967,21.98538 6.35064,7.95667 14.58873,11.93729 24.70919,11.93729 9.03149,0 16.67002,-3.25109 22.9212,-9.74241 6.25399,-6.59703 9.37846,-14.65259 9.37846,-24.18026 0,-9.422 -3.17646,-17.37639 -9.52708,-23.86775 -6.2495,-6.59477 -13.8428,-9.89721 -22.77258,-9.89721 z M 255.99998,7.9999981 C 119.03396,7.9999981 7.9999985,119.03394 7.9999985,255.99998 7.9999985,392.96602 119.03396,504 255.99998,504 392.96606,504 504,392.96602 504,255.99998 504,119.03394 392.96606,7.9999981 255.99998,7.9999981 Z M 197.17431,331.79065 h -45.93563 v -18.69931 c -4.66437,5.85506 -15.63869,11.82369 -20.40025,14.50172 -8.33473,4.66267 -19.65377,7.70067 -30.27265,7.70067 -17.167865,0 -32.44885,-5.425 -45.844653,-17.23173 -15.977193,-14.0903 -23.483472,-35.63322 -23.483472,-58.85447 0,-23.61798 8.186103,-42.47212 24.559999,-56.56242 12.999092,-11.21393 28.896046,-20.18949 45.766106,-20.18949 9.82264,0 21.93961,0.88269 30.57214,5.04865 4.96218,2.38076 13.84449,7.98548 19.10448,13.44381 v -98.50164 h 45.93564 v 229.34421 z m 157.21544,-21.13999 c -15.28099,17.58718 -36.66682,26.38303 -64.15348,26.38303 -27.58613,0 -49.01942,-8.79585 -64.30436,-26.38303 -12.60069,-14.44803 -18.90387,-32.19228 -18.90387,-53.23507 0,-18.94908 6.35065,-35.75132 19.0525,-50.4079 15.37988,-17.69285 37.26185,-26.54011 65.64139,-26.54011 26.09766,0 46.93585,8.84558 62.51694,26.54011 12.70185,14.44806 19.05247,31.66734 19.05247,51.66468 0.003,20.20586 -6.29921,37.53085 -18.90159,51.97886 z m 38.76899,-199.21794 c 5.35888,-5.35888 11.85868,-8.03746 19.49892,-8.03746 7.64024,0 14.14005,2.67858 19.49893,8.03746 5.35888,5.25945 8.03746,11.70955 8.03746,19.35034 0,7.73965 -2.67858,14.28864 -8.03746,19.64753 -5.25944,5.25944 -11.75925,7.8883 -19.49893,7.8883 -7.64247,0 -14.14227,-2.67861 -19.49892,-8.0375 -5.2594,-5.35885 -7.88829,-11.85871 -7.88829,-19.49892 -0.003,-7.6402 2.62889,-14.0903 7.88829,-19.35029 z m 43.91029,220.24265 H 388.24626 V 185.84118 h 48.82277 z" id="path2"&gt;&lt;/path&gt;  &lt;/g&gt;&lt;/svg&gt; [**Penalised Complexity** (PC) priors](https://projecteuclid.org/journals/statistical-science/volume-32/issue-1/Penalising-Model-Component-Complexity--A-Principled-Practical-Approach-to/10.1214/16-STS576.full)
+
+- Regularise inference while not forcing too strong information
+   
+- Penalise departure from a "base" model (eg parameter = some fixed value)
+
+   - Prior tends to favour the base model `\(\Rightarrow\)` need fairly strong evidence to move away from it
+   
+   - Distance between the **base** model `\(\color{red}g(\xi)\)` and an **alternative**, more complex model `\(\color{blue}f(\xi)\)` is measured by
+
+.myblue[   
+`$$d(f,g) = \sqrt{2\kld(f,g)} \qquad {\style{font-family:inherit; font-size: 105%; color: black;}{\text{with}}} \qquad \kld(f,g) = \int f(\xi)\log\left(\frac{f(\xi)}{g(\xi)}\right)d\xi$$` 
+]
+
+--
+
+   - Penalisation done at a constant rate 
+
+.myblue[   
+`$$p(d)=\lambda\exp(-\lambda d)\sim \dexp(\lambda) \qquad {\color{black}\Rightarrow} \qquad p(\xi)=\lambda e^{-\lambda d(\xi)}\left\lvert \frac{\partial d(\xi)}{\partial \xi} \right\rvert$$`
+]
+
+   - PC prior defined using probability statements on the model parameters (in the appropriate scale) to determine the value of `\(\lambda\)` using "reasonable" information
+
+---
+
+count: false
+exclude: true
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+## Example:
+
+.pull-left[
+
+PC prior for a  **precision** `\(\tau=\sigma^{-2}\)`
+
+- Base model: `\(\sigma=0\)`
+
+- Set `\(\Pr(\sigma&gt;\sigma_0)=\alpha,\)` for some constants `\(\sigma_0\)` and `\(\alpha\)`
+   
+- This implies
+
+   .myblue[
+   $$p(\tau) = \frac{\lambda}{2}\tau^{-3/2}\exp\left(-\lambda\tau^{-1/2}\right) \sim \style{font-family:inherit;}{\text{type-2 Gumbel}} $$
+   ]
+   
+   with 
+   
+   .myblue[
+   `$$\lambda=-\frac{\log(\alpha)}{\sigma_0}$$`
+   ]
+
+&lt;span style="display:block; margin-top: 20px ;"&gt;&lt;/span&gt;
+- **NB**: The regularising constraint and the actual prior may be defined on **different scales**!
+   - In this case, the resulting prior for the standard deviation is
+   .myblue[
+   `$$p(\sigma)\sim\dexp(\lambda)$$`
+   ]
+]
+
+
+
+.pull-right[
+
+&lt;span style="display:block; margin-top: -50px ;"&gt;&lt;/span&gt;
+.center[
+eg: setting `\(\sigma_0=2\)` and `\(\alpha=\)` 0.1 gives this  &lt;svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="position:relative;display:inline-block;top:.1em;fill:#00acee;height:1.5em;"&gt;  [ comment ]  &lt;path d="M504 256c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-143.6-28.9L288 302.6V120c0-13.3-10.7-24-24-24h-16c-13.3 0-24 10.7-24 24v182.6l-72.4-75.5c-9.3-9.7-24.8-9.9-34.3-.4l-10.9 11c-9.4 9.4-9.4 24.6 0 33.9L239 404.3c9.4 9.4 24.6 9.4 33.9 0l132.7-132.7c9.4-9.4 9.4-24.6 0-33.9l-10.9-11c-9.5-9.5-25-9.3-34.3.4z"&gt;&lt;/path&gt;&lt;/svg&gt;
+]
+
+
+
+&lt;center&gt;&lt;img src=./img/unnamed-chunk-3-1.png width='90%' title=''&gt;&lt;/center&gt;
+]
+
+---
+
+# PC Priors
+
+.panelset[
+.panel[.panel-name[Example]
+.pull-left[
+
+PC prior for a  **precision** `\(\tau=\sigma^{-2}\)`
+
+- Base model: `\(\sigma=0\)`
+
+- Set `\(\Pr(\sigma&gt;\sigma_0)=\alpha,\)` for some constants `\(\sigma_0\)` and `\(\alpha\)`
+   
+- This implies
+
+   .myblue[
+   $$p(\tau) = \frac{\lambda}{2}\tau^{-3/2}\exp\left(-\lambda\tau^{-1/2}\right) \sim \style{font-family:inherit;}{\text{type-2 Gumbel}} $$
+   ]
+   
+   with 
+   
+   .myblue[
+   `$$\lambda=-\frac{\log(\alpha)}{\sigma_0}$$`
+   ]
+
+&lt;span style="display:block; margin-top: 20px ;"&gt;&lt;/span&gt;
+- **NB**: The regularising constraint and the actual prior may be defined on **different scales**!
+   - In this case, the resulting prior for the standard deviation is
+   .myblue[
+   `$$p(\sigma)\sim\dexp(\lambda)$$`
+   ]
+]
+
+
+
+.pull-right[
+
+&lt;span style="display:block; margin-top: -30px ;"&gt;&lt;/span&gt;
+.center[
+eg: setting `\(\sigma_0=2\)` and `\(\alpha=\)` 0.1 gives this  &lt;svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="position:relative;display:inline-block;fill:#00acee;height:1.5em;top:10px;"&gt;  [ comment ]  &lt;path d="M504 256c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-143.6-28.9L288 302.6V120c0-13.3-10.7-24-24-24h-16c-13.3 0-24 10.7-24 24v182.6l-72.4-75.5c-9.3-9.7-24.8-9.9-34.3-.4l-10.9 11c-9.4 9.4-9.4 24.6 0 33.9L239 404.3c9.4 9.4 24.6 9.4 33.9 0l132.7-132.7c9.4-9.4 9.4-24.6 0-33.9l-10.9-11c-9.5-9.5-25-9.3-34.3.4z"&gt;&lt;/path&gt;&lt;/svg&gt;
+]
+
+
+
+&lt;center&gt;&lt;img src=./img/unnamed-chunk-3-1.png width='90%' title=''&gt;&lt;/center&gt;
+]
+]
+
+.panel[.panel-name[Proof]
+
+Consider the two competing models for some parameter `\(\theta\)` (or data `\(y\)`) as a function of a **precision** `\(\tau\)`
+`$${\color{blue}g(\tau)\sim \dnorm(0,\tau=\tau_0\rightarrow \infty)} \qquad \style{font-family:inherit;}{\text{and}} \qquad {\color{red}{f(\tau)\sim \dnorm(0,\tau), \tau\in(0,\infty)}}$$`
+
+&lt;span style="display:block; margin-top: 50px ;"&gt;&lt;/span&gt;
+
+Then 
+
+- `\(\class{myblue}{\kld(f,g)=\frac{1}{2}\frac{\tau_0}{\tau}\left[ 1+\frac{\tau}{\tau_0}\log\left(\frac{\tau}{\tau_0}\right) -\frac{\tau}{\tau_0} \right] \rightarrow \frac{1}{2}\frac{\tau_0}{\tau}}\qquad {\color{black}\style{font-family:inherit;}{\text{if }}} \tau&lt;&lt;\tau_0\)` 
+
+- `\(\class{myblue}{d(\tau)=\sqrt{2\kld(f,g)}=\sqrt{\frac{\tau_0}{\tau}}=\tau_0^{1/2}\tau^{-1/2}}\)`
+
+&lt;span style="display:block; margin-top: 50px ;"&gt;&lt;/span&gt;
+Assuming `\(\class{myblue}{p(d)=\lambda\exp(-\lambda d)}\)` then 
+   
+- `\(\class{myblue}{\left\lvert \frac{\partial d(\tau)}{\partial \tau} \right\rvert = \left\lvert -\frac{1}{2}\tau^{-3/2}\right\lvert = \frac{1}{2}\tau^{-3/2} \qquad \Rightarrow \qquad p(\tau)=\lambda\exp\left[-\lambda d(\tau)\right]\left\lvert \frac{\partial d(\tau)}{\partial \tau} \right\rvert = \frac{\lambda}{2}\tau^{-3/2} \exp\left( -\lambda \tau^{-1/2}\right)}\)`
+   
+- `\(\class{myblue}{\left\lvert\frac{\partial\tau}{\partial\sigma}\right\lvert=\left\lvert\frac{\partial\sigma^{-2}}{\partial\sigma}\right\lvert=\lvert -2\sigma^{-3}\lvert=2\sigma^{-3} \hspace{-8 mu}\qquad\!\! \Rightarrow \qquad p(\sigma=\tau^{-1/2})=\frac{\lambda}{2}\sigma^3\exp\left(-\lambda\sigma\right)\left\lvert\frac{\partial\tau}{\partial\sigma}\right\lvert=\lambda\exp(-\lambda\sigma)}\)`
+
+]
+]
+
+---
+
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+## Priors (hyperparameters)
+
+### Spatial field
+
+.pull-left[
+- Set `\(\Pr(\tau_b^{-0.5}&gt;1)=0.01\)` `\(\Rightarrow \lambda=-\log(0.01)\approx 4.61\)` 
+
+   - Basically implies `\(\sigma_b\sim\dexp(4.61)\)` 
+   
+   - *Very* unlikely to have a relative risk &gt; `\(\exp(2)\)`, based solely on spatial variation
+
+&lt;span style="display:block; margin-top: 20px ;"&gt;&lt;/span&gt;
+
+]
+
+.pull-right[
+
+&lt;span style="display:block; margin-top: -60px ;"&gt;&lt;/span&gt;
+&lt;center&gt;&lt;img src=./img/unnamed-chunk-4-1.png width='90%' title=''&gt;&lt;/center&gt;
+]
+
+---
+
+count: false
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+## Priors (hyperparameters)
+
+### Spatial field
+
+.pull-left[
+- Set `\(\Pr(\tau_b^{-0.5}&gt;1)=0.01\)` `\(\Rightarrow \lambda=-\log(0.01)\approx 4.61\)` 
+
+   - Basically implies `\(\sigma_b\sim\dexp(4.61)\)` 
+   
+   - *Very* unlikely to have a relative risk &gt; `\(\exp(2)\)`, based solely on spatial variation
+
+&lt;span style="display:block; margin-top: 20px ;"&gt;&lt;/span&gt;
+
+- Set `\(\Pr(\phi&lt;0.5)=0.5\)` 
+
+   - Reflect lack of knowledge about which spatial component dominates the field
+   
+   - **NB**: Resulting distribution is non-standard
+
+&lt;span style="display:block; margin-top: 40px ;"&gt;&lt;/span&gt;
+
+]
+
+.pull-right[
+
+&lt;span style="display:block; margin-top: -60px ;"&gt;&lt;/span&gt;
+&lt;center&gt;&lt;img src=./img/pc-phi-1.png width='90%' title=''&gt;&lt;/center&gt;
+]
+
+---
+
+count: false
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+## Priors (hyperparameters)
+
+### Spatial field
+
+.pull-left[
+- Set `\(\Pr(\tau_b^{-0.5}&gt;1)=0.01\)` `\(\Rightarrow \lambda=-\log(0.01)\approx 4.61\)` 
+
+   - Basically implies `\(\sigma_b\sim\dexp(4.61)\)` 
+   
+   - *Very* unlikely to have a relative risk &gt; `\(\exp(2)\)`, based solely on spatial variation
+
+&lt;span style="display:block; margin-top: 20px ;"&gt;&lt;/span&gt;
+
+- Set `\(\Pr(\phi&lt;0.5)=0.5\)` 
+
+   - Reflect lack of knowledge about which spatial component dominates the field
+   
+   - **NB**: Resulting distribution is non-standard
+
+&lt;span style="display:block; margin-top: 40px ;"&gt;&lt;/span&gt;
+
+### Variance components
+
+- Set `\(\Pr(\sigma_\varepsilon\!&gt;\!1)\!=\!\Pr(\sigma_x^\!&gt;\!1)\!=\!\Pr(\sigma_w^\!&gt;\!1)\!=\!0.01\)`
+
+]
+
+.pull-right[
+
+&lt;span style="display:block; margin-top: -60px ;"&gt;&lt;/span&gt;
+&lt;center&gt;&lt;img src=./img/unnamed-chunk-4-1.png width='90%' title=''&gt;&lt;/center&gt;
+]
+
+---
+
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+## Training and prediction
+
+- Use data from 2015-2019 to "train" the model 
+
+- Predict area-level weekly mortality for 2020 (\\(t=6\\)), **in the hypothetical scenario** in which the pandemic hadn't occurred
+   
+   .myblue[
+   `$$p(y_{j6sk}\mid \mathcal{D}) = \int p(y_{j6sk}\mid \bm\theta)p(\bm\theta\mid\mathcal{D})\bm\theta$$`
+   ]
+   
+   - `\(\bm\theta=\)` all model parameters
+   - `\(\mathcal{D}=\)` observed data in 2015-2019
+   - Mortality rates applied to 2020 come from the model trained on 2015-2019
+   
+- Compare observed deaths in 2020 with model predictions
+
+&lt;span style="display:block; margin-top: 50px ;"&gt;&lt;/span&gt;
+
+--
+
+
+.content-box-grey[
+
+&lt;svg viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg" style="position:relative;display:inline-block;top:.1em;fill:red;height:1.2em;"&gt;  [ comment ]  &lt;path d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"&gt;&lt;/path&gt;&lt;/svg&gt; This assumes **exchangeability** between 2015-2019 and 2020...
+
+- Which is **obviously** an unjustifiable assumption &amp;ndash; the pandemic **did** change the underlying data generating process!
+
+- **But**: it allows us to measure the excess mortality
+
+]
+
+---
+
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+## Inferential engine
+
+- All models have been fitted using [**Integrated Nested Laplace Approximation**](https://www.r-inla.org/) (INLA)
+
+- Considers a general formulation for a surprisingly large range of models (.red[**Latent Gaussian Models**], LGM)
+.myblue[
+`\begin{aligned}
+\bm\psi &amp; \sim p(\bm\psi) &amp;&amp; \style{font-family:inherit;}{\text{hyperprior}}\\
+\bm\theta \mid \bm\psi &amp; \sim p(\bm\theta\mid\bm\psi) = \dnorm(0,\bm\Sigma(\bm\psi_1)) &amp;&amp; \color{blue}{\style{font-family:inherit;}{\text{GMRF prior}}} \\
+\bm y \mid \bm \theta,\bm\psi &amp; \sim \prod_i p(y_i\mid\bm \theta,\bm\psi_2) &amp;&amp; \style{font-family:inherit;}{\text{Data model}}
+\end{aligned}`
+]
+
+--
+
+1. .blue[Gaussian Markov Random Field (GMRF)]
+
+   .myblue[
+`\begin{aligned}
+\bm\theta\mid\bm\psi \sim \dnorm(\bm 0,\bm\Sigma(\bm\psi)) &amp;&amp;\\
+\theta_l \perp\!\!\!\perp \theta_m \mid \bm\theta_{-lm} \Leftrightarrow \bm{Q}_{lm}=\bm{\Sigma}^{-1}_{lm} = 0 &amp;&amp;
+\end{aligned}`
+]
+   
+   - Conditional independence among elements of `\(\bm\theta\)` implies that the **precision** matrix is sparse `\(\Rightarrow\)` speeds up computation
+
+2. Dimensionality of parameters
+
+   - The dimension of `\(\bm\theta\)` can be very large (e.g. 10\\(^\2\\)&amp;ndash;10\\(^\5\\) )
+ 
+   - Conversely, because of the conditional independence properties, the dimension of `\(\bm\psi\)` needs to be generally small (e.g. 1&amp;ndash;5)
+
+---
+
+exclude: true
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+&lt;img src="./img/inla1-1.png" style="display: block; margin: auto;" width="80%" title=""&gt;
+
+&lt;img src="./img/inla2-1.png" style="display: block; margin: auto;" width="80%" title=""&gt;
+
+&lt;img src="./img/inla3-1.png" style="display: block; margin: auto;" width="80%" title=""&gt;
+
+&lt;img src="./img/inla4-1.png" style="display: block; margin: auto;" width="80%" title=""&gt;
+
+&lt;img src="./img/inla5-1.png" style="display: block; margin: auto;" width="80%" title=""&gt;
+
+&lt;center&gt;&lt;img src=./img/inla5-1.png width='70%' title=''&gt;&lt;/center&gt;
+
+---
+
+# INLA &amp;ndash; in a nutshell...
+
+.pull-left[
+.medium[
+&lt;ol style="counter-reset: my-counter 0;"&gt;
+&lt;li&gt;Select a grid of \(H\) points \(\{\bm\psi_h^*\}\) and the associated area weights \(\{\Delta_h\}\); interpolate the resulting density to compute the approximation to the posterior&lt;/li&gt;
+&lt;/ol&gt;
+]
+
+&lt;center&gt;&lt;img src=./img/inla1-1.png width='90%' title=''&gt;&lt;/center&gt;
+]
+.pull-right[
+.medium[
+&lt;ol style="counter-reset: my-counter 1;"&gt;
+&lt;li&gt; Approximates the conditional posterior of each \(\theta_j\), given \(\bm\psi, \bm{y}\) on the \(H−\)dimensional grid&lt;/li&gt;
+&lt;/ol&gt;
+]
+
+&lt;span style="display:block; margin-top: 45px ;"&gt;&lt;/span&gt;
+&lt;center&gt;&lt;img src=./img/inla2-1.png width='90%' title=''&gt;&lt;/center&gt;
+]
+
+---
+
+count: false
+# INLA &amp;ndash; in a nutshell...
+
+.pull-left[
+.medium[
+&lt;ol style="counter-reset: my-counter 2;"&gt;
+&lt;li&gt; Weigh the resulting (conditional) marginal posteriors by the density associated with each \(\psi_h^*\) on the grid&lt;/li&gt;
+&lt;/ol&gt;
+]
+
+&lt;span style="display:block; margin-top: 20px ;"&gt;&lt;/span&gt;
+&lt;center&gt;&lt;img src=./img/inla3-1.png width='90%' title=''&gt;&lt;/center&gt;
+]
+.pull-right[
+.medium[
+&lt;ol style="counter-reset: my-counter 3;"&gt;
+&lt;li&gt; (Numerically) sum over all the conditional densities to obtain the marginal posterior for \(\theta_j\)&lt;/li&gt;
+&lt;/ol&gt;
+]
+
+&lt;span style="display:block; margin-top: 20px ;"&gt;&lt;/span&gt;
+&lt;center&gt;&lt;img src=./img/inla4-1.png width='90%' title=''&gt;&lt;/center&gt;
+]
+
+---
+
+# Modelling &amp;ndash; Bayesian spatio-temporal model
+
+## Model validation
+
+.content-box-beamer[
+### Based on cross-validation
+
+.normal[
+- Fit the model for 2015-2019 multiple times, leaving out one year at a time
+
+- Predict the weekly number of deaths by NUTS3 region for the year left out
+
+- Repeat for different age/sex groups and countries
+]
+]
+
+--
+
+&lt;span style="display:block; margin-top: 40px ;"&gt;&lt;/span&gt;
+
+.content-box-beamer[
+### Assess agreement based on
+
+.normal[   
+- Correlation between predicted and observed deaths
+
+- 95% coveage = `\(\Pr(\style{font-family:inherit;}{\text{Observed deaths lie within 95% interval from the model}})\)`
+]
+]
+
+--
+
+&lt;span style="display:block; margin-top: 20px ;"&gt;&lt;/span&gt;
+
+- Generally, models had good predictive ability
+   - Highest correlation for &gt;80 yo: 0.83 (0.82-0.84) for females/England to 0.97 (0.97-0.98) for males/Spain
+   - Coverage range from 0.90 (females/Spain) to 0.95 (males/Switzerland)
+   
+- &lt;40 yo had poorer performance
+   - Coverage *close* to nominal 0.95, but correlation much lower `\(\Rightarrow\)` excluded from base-case analysis
+
+---
+
+# Results
+
+### Country-level trends &amp; excess mortality
+
+&lt;span style="display:block; margin-top: -22px ;"&gt;&lt;/span&gt;
+.pull-left[
+&lt;center&gt;&lt;img src=./img/Fig1_EN.png width='72%' title='England'&gt;&lt;/center&gt; 
+]
+.pull-right[
+&lt;center&gt;&lt;img src=./img/Fig1_SP.png width='72%' title='Spain'&gt;&lt;/center&gt;
+]
+
+---
+
+count: false
+# Results
+
+### Country-level trends &amp; excess mortality
+
+&lt;span style="display:block; margin-top: -22px ;"&gt;&lt;/span&gt;
+.pull-left[
+&lt;center&gt;&lt;img src=./img/Fig1_CH.png width='72%' title='Switzerland'&gt;&lt;/center&gt; 
+]
+.pull-right[
+&lt;center&gt;&lt;img src=./img/Fig1_GR.png width='72%' title='Greece'&gt;&lt;/center&gt;
+]
+
+---
+
+count: false
+# Results
+
+### Country-level trends &amp; excess mortality
+
+&lt;span style="display:block; margin-top: -22px ;"&gt;&lt;/span&gt;
+&lt;center&gt;&lt;img src=./img/Fig1_IT.png width='35%' title='Italy'&gt;&lt;/center&gt;
+
+---
+
+# Results
+
+### Sub-national level trends &amp; excess mortality (NUTS2)
+
+#### Relative excess death (%)
+&lt;span style="display:block; margin-top: -22px ;"&gt;&lt;/span&gt;
+&lt;center&gt;&lt;img src=./img/eng-nuts3.png width='70%' title='Eng'&gt;&lt;/center&gt;
+
+---
+
+
+count: false
+# Results
+
+### Sub-national level trends &amp; excess mortality (NUTS2)
+
+#### Relative excess death (%)
+
+&lt;span style="display:block; margin-top: -22px ;"&gt;&lt;/span&gt;
+&lt;center&gt;&lt;img src=./img/swi-spa-nuts3.png width='70%' title='Swi/Spa'&gt;&lt;/center&gt;
+
+---
+
+count: false
+# Results
+
+### Sub-national level trends &amp; excess mortality (NUTS2)
+
+#### Relative excess death (%)
+
+&lt;span style="display:block; margin-top: -22px ;"&gt;&lt;/span&gt;
+
+&lt;center&gt;&lt;img src=./img/gr-it-nuts3.png width='65%' title='Gre/Ita'&gt;&lt;/center&gt;
+
+---
+
+# Results
+
+### Sub-national level trends &amp; excess mortality (NUTS3) .alignright[.small[Median relative excess death (%)]]
+
+&lt;span style="display:block; margin-top: -22px ;"&gt;&lt;/span&gt;
+&lt;center&gt;&lt;img src=./img/all-nuts3.png width='67%' title='all'&gt;&lt;/center&gt;
+
+---
+
+
+count: false
+# Results
+
+### Sub-national level trends &amp; excess mortality (NUTS3) .alignright[.small[Probability that relative excess deaths is &gt; 0%]]
+
+&lt;span style="display:block; margin-top: -22px ;"&gt;&lt;/span&gt;
+&lt;center&gt;&lt;img src=./img/all-probs-nuts3.png width='65%' title='all'&gt;&lt;/center&gt;
+
+---
+
+# All that and more...
+
+&lt;iframe frameborder="no" src="http://atlasmortalidad.uclm.es/excess/"
+style="
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    width: 200%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    z-index: 999999;
+    height: 100%;
+    ms-transform: scale(0.45);
+   -moz-transform: scale(0.85);
+   -o-transform: scale(0.85);
+   -webkit-transform: translate(+50%, -50%);
+    transform: translate(+50%, -50%);
+    &lt;!--
+   -webkit-transform: scale(0.45);
+   transform: scale(0.70);
+   --&gt;
+"&gt; &lt;/iframe&gt;
+
+---
+
+# Conclusions
+
+- Wide variation in 2020 excess mortality both within and across countries 
+
+   - Spain seems to have experienced the largest excess mortality
+   
+   - Greece and Italy especially had a very strong spatial gradient
+   
+   - Temporal patterns in all countries (possibly less so for Greece)
+
+&lt;span style="display:block; margin-top: 30px ;"&gt;&lt;/span&gt;
+
+--
+
+- Results are generally in line with other findings in the literature 
+
+   - Slightly lower *point* estimates than **national** analyses for England (but intervals agree) 
+   
+   - Consistent results for **national** estimates for Greece, Italy, Switzerland and Spain
+
+&lt;span style="display:block; margin-top: 30px ;"&gt;&lt;/span&gt;
+
+--
+
+- Overall, seem to suggest that a timely lockdown led to reduced community transmissions and, subsequently, lower excess mortality
+
+---
+
+class: thankyou-barney 
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url("assets/ucl-stats/UCL-stats.png");
+  background-size: 14% 7%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top:  2.625%; /* 2.65%em */
+  left: 85%;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)' +
+    ':not(.thankyou-michelle)' +
+    ':not(.thankyou-barney)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
